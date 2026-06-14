@@ -1,1 +1,1 @@
-# VPN_Academy-
+# VPN_Academy

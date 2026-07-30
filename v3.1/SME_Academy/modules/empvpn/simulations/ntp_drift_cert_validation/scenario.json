@@ -1,0 +1,69 @@
+{
+  "id": "ntp_drift_cert_validation",
+  "title": "NTP_Drift_Cert_Validation_Failure",
+  "platform": "41xx",
+  "levels": ["level1", "level2"],
+  "tags": ["ntp", "fxos", "certificates", "41xx", "trap_door", "india"],
+  "story": {
+    "ticket_summary": "INC0042187 — II771 India headend. Users unable to connect. SSL handshake failures reported. Cert appears valid. Chain appears valid. No recent changes.",
+    "learner_goal": "Identify the root cause of cert validation failure on a 41xx headend where the cert and chain are confirmed good.",
+    "context": "This is a 41xx platform (FXOS + ASA). The headend is in India. No changes were made in the last 72 hours. The identity cert is valid and not expired. The CA chain is complete and trusted."
+  },
+  "steps": [
+    {
+      "question": "Users are getting SSL handshake failures. Cert is reported valid. Your first move is:",
+      "choices": [
+        "Check the cert expiry date in ASA",
+        "Check NTP sync status — start in FXOS on a 41xx",
+        "Reboot the ASA",
+        "Open a TAC case immediately"
+      ],
+      "answer": "Check NTP sync status — start in FXOS on a 41xx",
+      "explain": "On a 41xx, ASA inherits time from FXOS. If FXOS time has drifted, ASA cannot validate certs even if they are perfectly valid. NTP is always suspect when cert validation fails unexpectedly."
+    },
+    {
+      "question": "You SSH to the headend and land in ASA. You run 'show ntp status'. It shows no NTP configured. This means:",
+      "choices": [
+        "NTP was never set up — escalate to Horton",
+        "This is normal on a 41xx — NTP is configured in FXOS, not ASA",
+        "ASA NTP config was wiped — restore from backup",
+        "The ASA image is corrupt"
+      ],
+      "answer": "This is normal on a 41xx — NTP is configured in FXOS, not ASA",
+      "explain": "On 41xx platforms, ASA does not manage NTP. FXOS is the time authority. Absence of NTP config in ASA is expected and correct. You need to connect to FXOS to check time sync."
+    },
+    {
+      "question": "You connect to the FXOS management interface. You check NTP and see all sources show 'unsynchronized'. The last sync was 3 days ago. What do you do?",
+      "choices": [
+        "Reboot FXOS",
+        "Replace the NTP servers with Google public DNS",
+        "Investigate why FXOS lost NTP sync — check reachability to NTP sources, then force resync",
+        "The cert must actually be expired — recheck"
+      ],
+      "answer": "Investigate why FXOS lost NTP sync — check reachability to NTP sources, then force resync",
+      "explain": "FXOS lost contact with its NTP source(s). Verify reachability from FXOS management interface to the NTP IPs. Once reachability is restored, FXOS will resync and ASA cert validation will recover. Do not reboot FXOS — that bounces 7k+ users."
+    },
+    {
+      "question": "FXOS had only one NTP source configured. It became unreachable. What is the standard we now enforce?",
+      "choices": [
+        "One NTP source is fine if it is reliable",
+        "Two NTP sources minimum",
+        "Three NTP sources minimum, alert if all are unsynced for 24hrs+",
+        "NTP should be handled by the network team, not VPN SMEs"
+      ],
+      "answer": "Three NTP sources minimum, alert if all are unsynced for 24hrs+",
+      "explain": "This incident drove the current standard: 3 NTP sources on every headend, with alerting if zero sources are synced for 24 hours or more. Single NTP source is a single point of failure for cert validation and logging integrity."
+    },
+    {
+      "question": "After restoring NTP sync on FXOS, how long should you wait before confirming the cert validation issue is resolved?",
+      "choices": [
+        "Immediately — NTP sync fixes it instantly",
+        "A few minutes — allow time for FXOS to stabilize and ASA to reflect corrected time",
+        "24 hours — the alert threshold",
+        "You need to reissue the cert to clear the validation error"
+      ],
+      "answer": "A few minutes — allow time for FXOS to stabilize and ASA to reflect corrected time",
+      "explain": "Once FXOS syncs, time propagates to ASA within minutes. Test client connections after a short stabilization window. No cert reissue needed — the cert was never the problem."
+    }
+  ]
+}

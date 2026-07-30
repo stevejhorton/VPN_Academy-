@@ -1,0 +1,20 @@
+{
+  "user_id": "demo_sme",
+  "display_name": "Demo_SME",
+  "cert_level": "none",
+  "track": "level1",
+  "percent_complete": 22,
+  "points": 110,
+  "badges": ["Git_Basics"],
+  "labs_completed": 1,
+  "modules_completed": [],
+  "simulations": {},
+  "quiz_scores": {},
+  "notes": "",
+  "last_active": "",
+  "ghec_username": "",
+  "assigned_headends": [],
+  "manager": "",
+  "team": "",
+  "_access": "SLO and Service_Architect roles only"
+}

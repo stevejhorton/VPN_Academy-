@@ -1,0 +1,11 @@
+{
+  "id": "empvpn",
+  "title": "EmpVPN",
+  "service_owner": "Horton",
+  "description": "Remote_Access_VPN_reference_implementation_for_SME_Academy",
+  "levels": [
+    "level1",
+    "level2",
+    "service_owner"
+  ]
+}

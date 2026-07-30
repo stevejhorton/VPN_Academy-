@@ -1,0 +1,1959 @@
+
+: 
+: Serial Number: FLM25430AMJ
+: Hardware:   FPR4K-SM-24S, 173739 MB RAM, CPU Xeon 4100/6100/8100 series 2100 MHz, 2 CPUs (48 cores)
+: Written by shorto40 at 02:28:06.169 UTC Sun May 15 2022
+!
+ASA Version 9.12(4)24 
+!
+hostname asatx777vpn01-NEW
+domain-name uhc.com
+enable password $sha512$5000$llvNHdNb9CCm3b87UDXiuA==$rjG3ieY8vFXQqWsN7vwEOA== pbkdf2
+service-module 0 keepalive-timeout 4
+service-module 0 keepalive-counter 6
+!
+license smart
+ feature tier standard
+names
+name 161.249.72.39 tx777-1.bc.uhc.com
+name 161.249.72.40 tx777-2.bc.uhc.com
+dns-guard
+no mac-address auto
+
+!
+interface Port-channel20
+ nameif Inside
+ security-level 100
+ ip address 10.37.16.10 255.255.255.0 
+!
+interface Port-channel21
+ nameif Outside
+ security-level 0
+ ip address tx777-1.bc.uhc.com 255.255.255.224 
+!
+banner login  This system may contain U.S. Government information which is restricted
+banner login  to authorized users only. The information system includes:
+banner login  1) This computer, 2) this computer network 3) all computers connected 
+banner login  to this network 4) all devices and storage media attached to this network
+banner login  or to a computer on this network. Unauthorized access, use, misuse, or 
+banner login  modification of this computer system or of the data contained herein or in
+banner login  transit to/from this system constitutes disciplinary action as well as a 
+banner login  violation of Title 18, United States Code, Section 1030, and may subject 
+banner login  the individual to criminal and civil penalties pursuant to Title 26, United 
+banner login  States Code, Sections 7213, 7213A (the Taxpayer Browsing Protection Act), 
+banner login  and 7431. YOU AND ANYONE USING THIS SYSTEM UNDERSTANDS AND EXPRESSLY CONSENTS
+banner login  TO THE FOLLOWING: You have no reasonable expectation of privacy regarding any 
+banner login  communication or data transiting or stored on this information system. At any 
+banner login  time, and for any lawful Government purpose, the Government may monitor, intercept, 
+banner login  and search and seize any communication or data transiting or stored on this 
+banner login  information system. Any communication or data transiting or stored on this 
+banner login  information system may be disclosed or used for any lawful Government purpose.
+ftp mode passive
+dns domain-lookup Inside
+dns server-group DefaultDNS
+ name-server 10.90.40.105 
+ name-server 10.4.148.103 
+ name-server 10.114.36.34 
+ domain-name uhc.com
+same-security-traffic permit intra-interface
+access-list Riverbed_TCP_Option_76_78 extended permit tcp any4 any4 
+access-list SPLIT_TUNNEL_IP remark *** Netskope ***
+access-list SPLIT_TUNNEL_IP standard permit 4.31.195.0 255.255.255.192 
+access-list SPLIT_TUNNEL_IP standard permit 8.36.116.0 255.255.255.0 
+access-list SPLIT_TUNNEL_IP standard permit 8.39.144.0 255.255.255.0 
+access-list SPLIT_TUNNEL_IP standard permit 31.186.239.0 255.255.255.0 
+access-list SPLIT_TUNNEL_IP standard permit 45.250.160.0 255.255.252.0 
+access-list SPLIT_TUNNEL_IP standard permit 74.217.93.0 255.255.255.0 
+access-list SPLIT_TUNNEL_IP standard permit 76.223.160.0 255.255.248.0 
+access-list SPLIT_TUNNEL_IP standard permit 103.47.244.0 255.255.255.0 
+access-list SPLIT_TUNNEL_IP standard permit 103.219.77.0 255.255.255.0 
+access-list SPLIT_TUNNEL_IP standard permit 103.219.78.0 255.255.254.0 
+access-list SPLIT_TUNNEL_IP standard permit 163.116.128.0 255.255.128.0 
+access-list SPLIT_TUNNEL_IP remark *** O365 ***
+access-list SPLIT_TUNNEL_IP standard permit 13.107.6.152 255.255.255.254 
+access-list SPLIT_TUNNEL_IP standard permit 13.107.18.10 255.255.255.254 
+access-list SPLIT_TUNNEL_IP standard permit 13.107.64.0 255.255.192.0 
+access-list SPLIT_TUNNEL_IP standard permit 13.107.128.0 255.255.252.0 
+access-list SPLIT_TUNNEL_IP standard permit 13.107.136.0 255.255.252.0 
+access-list SPLIT_TUNNEL_IP standard permit 23.103.160.0 255.255.240.0 
+access-list SPLIT_TUNNEL_IP standard permit 40.96.0.0 255.248.0.0 
+access-list SPLIT_TUNNEL_IP standard permit 40.104.0.0 255.254.0.0 
+access-list SPLIT_TUNNEL_IP standard permit 40.108.128.0 255.255.128.0 
+access-list SPLIT_TUNNEL_IP standard permit 52.96.0.0 255.252.0.0 
+access-list SPLIT_TUNNEL_IP standard permit 52.104.0.0 255.252.0.0 
+access-list SPLIT_TUNNEL_IP standard permit 52.112.0.0 255.252.0.0 
+access-list SPLIT_TUNNEL_IP standard permit 52.120.0.0 255.252.0.0 
+access-list SPLIT_TUNNEL_IP standard permit host 52.238.119.141 
+access-list SPLIT_TUNNEL_IP standard permit host 52.244.160.207 
+access-list SPLIT_TUNNEL_IP standard permit 104.146.128.0 255.255.128.0 
+access-list SPLIT_TUNNEL_IP standard permit host 131.253.33.215 
+access-list SPLIT_TUNNEL_IP standard permit 132.245.0.0 255.255.0.0 
+access-list SPLIT_TUNNEL_IP standard permit 150.171.32.0 255.255.252.0 
+access-list SPLIT_TUNNEL_IP standard permit 150.171.40.0 255.255.252.0 
+access-list SPLIT_TUNNEL_IP standard permit 191.234.140.0 255.255.252.0 
+access-list SPLIT_TUNNEL_IP standard permit host 204.79.197.215 
+access-list SPLIT_TUNNEL_IP remark *** Webex ***
+access-list SPLIT_TUNNEL_IP standard permit 62.109.192.0 255.255.192.0 
+access-list SPLIT_TUNNEL_IP standard permit 64.68.96.0 255.255.224.0 
+access-list SPLIT_TUNNEL_IP standard permit 66.114.160.0 255.255.240.0 
+access-list SPLIT_TUNNEL_IP standard permit 66.163.32.0 255.255.224.0 
+access-list SPLIT_TUNNEL_IP standard permit 69.26.160.0 255.255.224.0 
+access-list SPLIT_TUNNEL_IP standard permit 69.26.176.0 255.255.240.0 
+access-list SPLIT_TUNNEL_IP standard permit 114.29.192.0 255.255.224.0 
+access-list SPLIT_TUNNEL_IP standard permit 150.253.128.0 255.255.128.0 
+access-list SPLIT_TUNNEL_IP standard permit 170.133.128.0 255.255.192.0 
+access-list SPLIT_TUNNEL_IP standard permit 173.39.224.0 255.255.224.0 
+access-list SPLIT_TUNNEL_IP standard permit 173.243.0.0 255.255.240.0 
+access-list SPLIT_TUNNEL_IP standard permit 207.182.160.0 255.255.224.0 
+access-list SPLIT_TUNNEL_IP standard permit 209.197.192.0 255.255.224.0 
+access-list SPLIT_TUNNEL_IP standard permit 210.4.192.0 255.255.240.0 
+access-list SPLIT_TUNNEL_IP standard permit 216.151.128.0 255.255.224.0 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.18 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.18 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.19 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.19 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.25 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.25 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.26 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.26 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.27 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.27 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.28 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.28 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.29 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.29 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.30 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.30 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.31 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.114.144.31 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.12 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.12 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.13 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.13 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.14 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.14 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.15 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.15 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.16 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.16 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.17 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.17 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.18 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.18 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.19 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.19 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.20 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.203.36.20 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.12 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.12 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.13 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.13 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.14 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.14 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.15 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.15 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.16 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.16 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.17 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.17 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.18 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.18 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.19 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.19 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.20 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.50.48.20 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.73.27.20 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.73.27.20 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.73.27.21 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.73.27.21 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.73.27.22 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.73.27.22 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.130.130.52 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.130.130.52 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.130.130.53 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.130.130.53 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.130.130.54 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.130.130.54 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.195.216.60 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.195.216.60 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.195.216.61 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.195.216.61 eq 8905 
+access-list DENY_ISE_V2 extended deny tcp any host 10.195.216.62 eq 8443 
+access-list DENY_ISE_V2 extended deny tcp any host 10.195.216.62 eq 8905 
+access-list DENY_ISE_V2 extended permit tcp any any range ssh telnet log 
+access-list DENY_ISE_V2 extended permit tcp any any range 902 903 log 
+access-list DENY_ISE_V2 extended permit tcp any any eq 1433 log 
+access-list DENY_ISE_V2 extended permit tcp any any eq 3306 log 
+access-list DENY_ISE_V2 extended permit tcp any any eq 3389 log 
+access-list DENY_ISE_V2 extended permit tcp any any eq 5900 log 
+access-list DENY_ISE_V2 extended permit tcp any any eq 5906 log 
+access-list DENY_ISE_V2 extended permit tcp any any range 5985 5986 log 
+access-list DENY_ISE_V2 extended permit ip any any 
+access-list EAC_VPN remark *** HSRP/GLBP/ICMP ***
+access-list EAC_VPN extended permit icmp any any echo-reply 
+access-list EAC_VPN extended permit udp any host 224.0.0.2 
+access-list EAC_VPN extended permit udp any host 224.0.0.102 
+access-list EAC_VPN remark *** DNS ***
+access-list EAC_VPN extended permit udp any any eq domain 
+access-list EAC_VPN remark *** DHCP ***
+access-list EAC_VPN extended permit udp any any eq bootps 
+access-list EAC_VPN remark *** WINS ***
+access-list EAC_VPN extended permit udp any host 10.4.148.118 eq netbios-ns 
+access-list EAC_VPN extended permit udp any host 10.3.116.110 eq netbios-ns 
+access-list EAC_VPN extended permit udp any host 10.4.148.119 eq netbios-ns 
+access-list EAC_VPN extended permit udp any host 10.3.116.109 eq netbios-ns 
+access-list EAC_VPN remark *** CSA ***
+access-list EAC_VPN extended permit tcp any any eq 5401 
+access-list EAC_VPN remark *** ISE POSTURING ***
+access-list EAC_VPN extended permit tcp any host 72.163.1.80 eq www 
+access-list EAC_VPN extended permit tcp any host 10.175.228.163 eq www 
+access-list EAC_VPN remark *** ISE STAGE ***
+access-list EAC_VPN extended permit tcp any host 10.204.65.89 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.204.65.89 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.106.145.239 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.106.145.239 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.106.145.240 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.106.145.240 eq 8905 
+access-list EAC_VPN remark *** ISE PROD ***
+access-list EAC_VPN extended permit tcp any host 10.114.144.18 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.18 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.19 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.19 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.25 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.25 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.26 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.26 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.27 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.27 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.28 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.28 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.29 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.29 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.30 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.30 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.114.144.31 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.114.144.31 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.12 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.12 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.13 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.13 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.14 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.14 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.15 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.15 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.16 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.16 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.17 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.17 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.18 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.18 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.19 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.19 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.203.36.20 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.203.36.20 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.12 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.12 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.13 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.13 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.14 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.14 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.15 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.15 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.16 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.16 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.17 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.17 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.18 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.18 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.19 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.19 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.50.48.20 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.50.48.20 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.73.27.20 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.73.27.20 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.73.27.21 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.73.27.21 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.73.27.22 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.73.27.22 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.130.130.52 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.130.130.52 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.130.130.53 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.130.130.53 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.130.130.54 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.130.130.54 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.195.216.60 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.195.216.60 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.195.216.61 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.195.216.61 eq 8905 
+access-list EAC_VPN extended permit tcp any host 10.195.216.62 eq 8443 
+access-list EAC_VPN extended permit tcp any host 10.195.216.62 eq 8905 
+access-list EAC_VPN remark *** NAC POLICY/CONTROL ***
+access-list EAC_VPN extended permit tcp any host 10.122.168.115 eq www 
+access-list EAC_VPN extended permit tcp any host 10.122.168.115 eq https 
+access-list EAC_VPN extended permit tcp any host 10.122.168.116 eq www 
+access-list EAC_VPN extended permit tcp any host 10.122.168.116 eq https 
+access-list EAC_VPN extended permit tcp any host 10.122.168.122 eq www 
+access-list EAC_VPN extended permit tcp any host 10.122.168.122 eq https 
+access-list EAC_VPN extended permit tcp any host 10.177.9.75 eq www 
+access-list EAC_VPN extended permit tcp any host 10.177.9.75 eq https 
+access-list EAC_VPN extended permit tcp any host 10.177.9.76 eq www 
+access-list EAC_VPN extended permit tcp any host 10.177.9.76 eq https 
+access-list EAC_VPN extended permit tcp any host 10.177.9.77 eq www 
+access-list EAC_VPN extended permit tcp any host 10.177.9.77 eq https 
+access-list EAC_VPN extended permit tcp any host 10.114.232.142 eq www 
+access-list EAC_VPN extended permit tcp any host 10.114.232.142 eq https 
+access-list EAC_VPN extended permit tcp any host 10.114.232.143 eq www 
+access-list EAC_VPN extended permit tcp any host 10.114.232.143 eq https 
+access-list EAC_VPN extended permit tcp any host 10.114.232.144 eq www 
+access-list EAC_VPN extended permit tcp any host 10.114.232.144 eq https 
+access-list EAC_VPN extended permit tcp any host 10.233.195.22 eq www 
+access-list EAC_VPN extended permit tcp any host 10.233.195.22 eq https 
+access-list EAC_VPN extended permit tcp any host 10.233.195.25 eq www 
+access-list EAC_VPN extended permit tcp any host 10.233.195.25 eq https 
+access-list EAC_VPN extended permit tcp any host 10.75.1.96 eq www 
+access-list EAC_VPN extended permit tcp any host 10.75.1.96 eq https 
+access-list EAC_VPN extended permit tcp any host 10.75.1.98 eq www 
+access-list EAC_VPN extended permit tcp any host 10.75.1.98 eq https 
+access-list EAC_VPN extended permit tcp any host 10.192.33.94 eq www 
+access-list EAC_VPN extended permit tcp any host 10.192.33.94 eq https 
+access-list EAC_VPN extended permit tcp any host 10.192.33.97 eq www 
+access-list EAC_VPN extended permit tcp any host 10.192.33.97 eq https 
+access-list EAC_VPN extended permit tcp any 10.114.164.32 255.255.255.224 eq www 
+access-list EAC_VPN extended permit tcp any 10.114.164.32 255.255.255.224 eq https 
+access-list EAC_VPN extended permit tcp any 10.177.12.64 255.255.255.224 eq www 
+access-list EAC_VPN extended permit tcp any 10.177.12.64 255.255.255.224 eq https 
+access-list EAC_VPN extended permit tcp any host 10.112.28.78 eq www 
+access-list EAC_VPN extended permit tcp any host 10.112.28.78 eq https 
+access-list EAC_VPN extended permit tcp any 10.192.33.32 255.255.255.240 eq www 
+access-list EAC_VPN extended permit tcp any 10.192.33.32 255.255.255.240 eq https 
+access-list EAC_VPN extended permit tcp any 10.193.1.112 255.255.255.240 eq www 
+access-list EAC_VPN extended permit tcp any 10.193.1.112 255.255.255.240 eq https 
+access-list EAC_VPN extended permit tcp any 10.75.1.0 255.255.255.192 eq www 
+access-list EAC_VPN extended permit tcp any 10.75.1.0 255.255.255.192 eq https 
+access-list EAC_VPN remark *** PROXY SERVERS ***
+access-list EAC_VPN extended permit tcp any 10.191.0.0 255.255.255.0 eq www 
+access-list EAC_VPN extended permit tcp any 10.191.0.0 255.255.255.0 eq https 
+access-list EAC_VPN extended permit tcp any 10.188.1.0 255.255.255.0 eq www 
+access-list EAC_VPN extended permit tcp any 10.188.1.0 255.255.255.0 eq https 
+access-list EAC_VPN extended permit tcp any 10.72.0.0 255.255.255.0 eq www 
+access-list EAC_VPN extended permit tcp any 10.72.0.0 255.255.255.0 eq https 
+access-list EAC_VPN extended permit tcp any 10.192.131.0 255.255.255.0 eq www 
+access-list EAC_VPN extended permit tcp any 10.192.131.0 255.255.255.0 eq https 
+access-list EAC_VPN extended permit tcp any 10.193.131.0 255.255.255.0 eq www 
+access-list EAC_VPN extended permit tcp any 10.193.131.0 255.255.255.0 eq https 
+access-list EAC_VPN extended permit tcp any host 10.118.136.117 eq www 
+access-list EAC_VPN remark *** ALTIRIS ***
+access-list EAC_VPN extended permit tcp any any eq 402 
+access-list EAC_VPN extended permit ip any host 10.122.35.43 
+access-list EAC_VPN extended permit ip any host 10.122.35.44 
+access-list EAC_VPN extended permit ip any host 10.177.8.78 
+access-list EAC_VPN extended permit ip any host 10.177.8.79 
+access-list EAC_VPN extended permit ip any host 10.177.8.80 
+access-list EAC_VPN extended permit ip any host 10.177.8.81 
+access-list EAC_VPN extended permit ip any host 10.122.34.191 
+access-list EAC_VPN extended permit ip any host 10.192.33.28 
+access-list EAC_VPN extended permit ip any host 10.5.180.111 
+access-list EAC_VPN extended permit ip any host 10.241.237.17 
+access-list EAC_VPN extended permit ip any host 10.81.184.114 
+access-list EAC_VPN extended permit ip any host 10.27.4.119 
+access-list EAC_VPN extended permit ip any host 10.22.38.211 
+access-list EAC_VPN extended permit ip any host 10.128.120.14 
+access-list EAC_VPN extended permit ip any host 10.239.107.26 
+access-list EAC_VPN extended permit ip any host 10.128.99.138 
+access-list EAC_VPN extended permit ip any host 10.122.35.42 
+access-list EAC_VPN extended permit ip any host 10.122.34.187 
+access-list EAC_VPN extended permit ip any host 10.5.180.119 
+access-list EAC_VPN extended permit ip any host 10.158.32.101 
+access-list EAC_VPN extended permit ip any host 10.179.232.107 
+access-list EAC_VPN extended permit ip any host 10.86.155.32 
+access-list EAC_VPN extended permit ip any host 10.86.155.33 
+access-list EAC_VPN extended permit ip any host 10.86.155.34 
+access-list EAC_VPN extended permit ip any host 10.86.155.35 
+access-list EAC_VPN extended permit ip any host 10.86.155.36 
+access-list EAC_VPN extended permit ip any host 10.86.155.37 
+access-list EAC_VPN extended permit ip any host 10.86.155.38 
+access-list EAC_VPN extended permit ip any host 10.86.155.39 
+access-list EAC_VPN extended permit ip any host 10.86.155.40 
+access-list EAC_VPN extended permit ip any host 10.86.155.42 
+access-list EAC_VPN extended permit ip any host 10.86.155.43 
+access-list EAC_VPN extended permit ip any host 10.86.155.44 
+access-list EAC_VPN extended permit ip any host 10.86.155.45 
+access-list EAC_VPN extended permit ip any host 10.86.155.46 
+access-list EAC_VPN extended permit ip any host 10.86.155.47 
+access-list EAC_VPN extended permit ip any host 10.86.152.160 
+access-list EAC_VPN extended permit ip any host 10.87.40.215 
+access-list EAC_VPN extended permit ip any host 10.87.40.216 
+access-list EAC_VPN extended permit ip any host 10.204.81.0 
+access-list EAC_VPN extended permit ip any host 10.204.81.1 
+access-list EAC_VPN extended permit ip any host 10.192.33.16 
+access-list EAC_VPN extended permit ip any host 10.192.33.18 
+access-list EAC_VPN extended permit ip any host 10.75.65.16 
+access-list EAC_VPN extended permit ip any host 10.194.33.17 
+access-list EAC_VPN extended permit ip any host 10.251.137.20 
+access-list EAC_VPN extended permit ip any host 10.250.169.18 
+access-list EAC_VPN extended permit ip any host 10.77.59.31 
+access-list EAC_VPN extended permit ip any host 10.246.153.31 
+access-list EAC_VPN extended permit ip any host 10.251.9.41 
+access-list EAC_VPN extended permit ip any host 10.199.33.31 
+access-list EAC_VPN extended permit ip any host 10.77.113.18 
+access-list EAC_VPN extended permit ip any host 10.250.225.31 
+access-list EAC_VPN extended permit ip any host 10.252.169.22 
+access-list EAC_VPN extended permit ip any host 10.194.119.18 
+access-list EAC_VPN extended permit ip any host 10.194.202.18 
+access-list EAC_VPN extended permit ip any host 10.178.220.208 
+access-list EAC_VPN extended permit ip any host 10.178.220.209 
+access-list EAC_VPN extended permit ip any host 10.248.119.60 
+access-list EAC_VPN extended permit ip any host 10.239.143.43 
+access-list EAC_VPN extended permit ip any host 10.139.65.42 
+access-list EAC_VPN extended permit ip any host 10.245.97.37 
+access-list EAC_VPN extended permit ip any host 10.245.65.52 
+access-list EAC_VPN extended permit ip any host 10.244.225.37 
+access-list EAC_VPN extended permit ip any host 10.35.148.38 
+access-list EAC_VPN extended permit ip any host 10.238.206.38 
+access-list EAC_VPN extended permit ip any host 10.240.175.36 
+access-list EAC_VPN extended permit ip any host 10.248.245.29 
+access-list EAC_VPN extended permit ip any host 10.32.180.35 
+access-list EAC_VPN extended permit ip any host 10.244.177.29 
+access-list EAC_VPN extended permit ip any host 10.154.8.37 
+access-list EAC_VPN extended permit ip any host 10.164.225.38 
+access-list EAC_VPN extended permit ip any host 10.244.17.25 
+access-list EAC_VPN extended permit ip any host 10.163.113.25 
+access-list EAC_VPN extended permit ip any host 10.253.65.31 
+access-list EAC_VPN extended permit ip any host 10.253.57.37 
+access-list EAC_VPN extended permit ip any host 10.253.49.29 
+access-list EAC_VPN extended permit ip any host 10.253.41.30 
+access-list EAC_VPN extended permit ip any host 10.140.33.31 
+access-list EAC_VPN extended permit ip any host 10.140.97.38 
+access-list EAC_VPN extended permit ip any host 10.164.81.32 
+access-list EAC_VPN extended permit ip any host 10.83.161.20 
+access-list EAC_VPN extended permit ip any host 10.164.145.39 
+access-list EAC_VPN extended permit ip any host 10.237.1.24 
+access-list EAC_VPN extended permit ip any host 10.237.1.33 
+access-list EAC_VPN extended permit ip any host 10.251.1.38 
+access-list EAC_VPN extended permit ip any host 10.159.212.41 
+access-list EAC_VPN extended permit ip any host 10.245.225.10 
+access-list EAC_VPN extended permit ip any host 10.166.33.202 
+access-list EAC_VPN extended permit ip any host 10.252.225.23 
+access-list EAC_VPN extended permit ip any host 10.253.97.26 
+access-list EAC_VPN extended permit ip any host 10.250.49.12 
+access-list EAC_VPN extended permit ip any host 10.9.20.33 
+access-list EAC_VPN extended permit ip any host 10.164.177.22 
+access-list EAC_VPN extended permit ip any host 10.229.129.20 
+access-list EAC_VPN extended permit ip any host 10.229.129.21 
+access-list EAC_VPN extended permit ip any host 10.253.169.22 
+access-list EAC_VPN extended permit ip any host 10.246.81.18 
+access-list EAC_VPN extended permit ip any host 10.239.65.104 
+access-list EAC_VPN extended permit ip any host 10.88.5.45 
+access-list EAC_VPN extended permit ip any host 10.250.145.27 
+access-list EAC_VPN extended permit ip any host 10.253.9.30 
+access-list EAC_VPN extended permit ip any host 10.251.105.30 
+access-list EAC_VPN extended permit ip any host 10.250.74.13 
+access-list EAC_VPN extended permit ip any host 10.253.161.20 
+access-list EAC_VPN extended permit ip any host 10.254.165.33 
+access-list EAC_VPN extended permit ip any host 10.92.20.55 
+access-list EAC_VPN extended permit ip any host 10.249.193.28 
+access-list EAC_VPN extended permit ip any host 10.254.137.20 
+access-list EAC_VPN extended permit ip any host 10.234.129.15 
+access-list EAC_VPN extended permit ip any host 10.164.49.20 
+access-list EAC_VPN extended permit ip any host 10.171.92.16 
+access-list EAC_VPN extended permit ip any host 10.92.20.32 
+access-list EAC_VPN extended permit ip any host 10.249.209.43 
+access-list EAC_VPN extended permit ip any host 10.246.65.37 
+access-list EAC_VPN extended permit ip any host 10.33.52.25 
+access-list EAC_VPN extended permit ip any host 10.237.129.53 
+access-list EAC_VPN extended permit ip any host 10.250.217.13 
+access-list EAC_VPN extended permit ip any host 10.239.175.50 
+access-list EAC_VPN extended permit ip any host 10.44.9.33 
+access-list EAC_VPN extended permit ip any host 10.139.33.37 
+access-list EAC_VPN extended permit ip any host 10.81.148.32 
+access-list EAC_VPN extended permit ip any host 10.231.95.45 
+access-list EAC_VPN extended permit ip any host 10.250.241.18 
+access-list EAC_VPN extended permit ip any host 10.232.65.101 
+access-list EAC_VPN extended permit ip any host 10.244.103.52 
+access-list EAC_VPN extended permit ip any host 10.244.130.52 
+access-list EAC_VPN extended permit ip any host 10.232.129.69 
+access-list EAC_VPN extended permit ip any host 10.232.129.70 
+access-list EAC_VPN extended permit ip any host 10.240.1.34 
+access-list EAC_VPN extended permit ip any host 10.233.129.27 
+access-list EAC_VPN extended permit ip any host 10.137.24.41 
+access-list EAC_VPN extended permit ip any host 10.233.129.35 
+access-list EAC_VPN extended permit ip any host 10.226.33.38 
+access-list EAC_VPN extended permit ip any host 10.226.193.40 
+access-list EAC_VPN extended permit ip any host 10.236.65.55 
+access-list EAC_VPN extended permit ip any host 10.236.65.54 
+access-list EAC_VPN extended permit ip any host 10.236.1.61 
+access-list EAC_VPN extended permit ip any host 10.248.13.37 
+access-list EAC_VPN extended permit ip any host 10.226.73.20 
+access-list EAC_VPN extended permit ip any host 10.235.3.40 
+access-list EAC_VPN extended permit ip any host 10.241.1.37 
+access-list EAC_VPN extended permit ip any host 10.140.129.35 
+access-list EAC_VPN extended permit ip any host 10.251.33.29 
+access-list EAC_VPN extended permit ip any host 10.224.4.33 
+access-list EAC_VPN extended permit ip any host 10.249.177.31 
+access-list EAC_VPN extended permit ip any host 10.171.92.33 
+access-list EAC_VPN extended permit ip any host 10.236.1.27 
+access-list EAC_VPN extended permit ip any host 10.15.84.37 
+access-list EAC_VPN extended permit ip any host 10.148.200.38 
+access-list EAC_VPN extended permit ip any host 10.252.73.30 
+access-list EAC_VPN extended permit ip any host 10.228.1.36 
+access-list EAC_VPN extended permit ip any host 10.159.212.45 
+access-list EAC_VPN extended permit ip any host 10.159.212.46 
+access-list EAC_VPN extended permit ip any host 10.159.212.51 
+access-list EAC_VPN extended permit ip any host 10.159.212.52 
+access-list EAC_VPN extended permit ip any host 10.234.65.35 
+access-list EAC_VPN extended permit ip any host 10.234.65.43 
+access-list EAC_VPN extended permit ip any host 10.237.65.42 
+access-list EAC_VPN extended permit ip any host 10.147.36.37 
+access-list EAC_VPN extended permit ip any host 10.233.1.44 
+access-list EAC_VPN extended permit ip any host 10.243.55.70 
+access-list EAC_VPN extended permit ip any host 10.237.65.103 
+access-list EAC_VPN extended permit ip any host 10.147.36.51 
+access-list EAC_VPN extended permit ip any host 10.235.129.91 
+access-list EAC_VPN extended permit ip any host 10.235.129.92 
+access-list EAC_VPN extended permit ip any host 10.237.193.49 
+access-list EAC_VPN extended permit ip any host 10.237.193.50 
+access-list EAC_VPN extended permit ip any host 10.209.65.22 
+access-list EAC_VPN extended permit ip any host 10.81.184.39 
+access-list EAC_VPN extended permit ip any host 10.81.184.40 
+access-list EAC_VPN extended permit ip any host 10.238.17.54 
+access-list EAC_VPN extended permit ip any host 10.246.225.54 
+access-list EAC_VPN extended permit ip any host 10.252.145.29 
+access-list EAC_VPN extended permit ip any host 10.15.84.47 
+access-list EAC_VPN extended permit ip any host 10.243.33.24 
+access-list EAC_VPN extended permit ip any host 10.145.84.32 
+access-list EAC_VPN extended permit ip any host 10.37.193.16 
+access-list EAC_VPN extended permit ip any host 10.165.241.42 
+access-list EAC_VPN extended permit ip any host 10.212.193.19 
+access-list EAC_VPN extended permit ip any host 10.252.89.115 
+access-list EAC_VPN extended permit ip any host 10.251.209.115 
+access-list EAC_VPN extended permit ip any host 10.252.49.31 
+access-list EAC_VPN extended permit ip any host 10.163.129.42 
+access-list EAC_VPN extended permit ip any host 10.249.65.11 
+access-list EAC_VPN extended permit ip any host 10.251.194.27 
+access-list EAC_VPN extended permit ip any host 10.163.193.42 
+access-list EAC_VPN extended permit ip any host 10.243.129.148 
+access-list EAC_VPN extended permit ip any host 10.241.33.59 
+access-list EAC_VPN extended permit ip any host 10.239.34.33 
+access-list EAC_VPN extended permit ip any host 10.126.8.38 
+access-list EAC_VPN extended permit ip any host 10.16.104.32 
+access-list EAC_VPN extended permit ip any host 10.158.20.34 
+access-list EAC_VPN extended permit ip any host 10.56.84.32 
+access-list EAC_VPN extended permit ip any host 10.27.8.42 
+access-list EAC_VPN extended permit ip any host 10.238.239.44 
+access-list EAC_VPN extended permit ip any host 10.253.145.18 
+access-list EAC_VPN extended permit ip any host 10.246.113.40 
+access-list EAC_VPN extended permit ip any host 10.246.241.42 
+access-list EAC_VPN extended permit ip any host 10.246.33.46 
+access-list EAC_VPN extended permit ip any host 10.186.212.175 
+access-list EAC_VPN extended permit ip any host 10.34.212.29 
+access-list EAC_VPN extended permit ip any host 10.245.81.33 
+access-list EAC_VPN extended permit ip any host 10.248.157.37 
+access-list EAC_VPN extended permit ip any host 10.252.137.26 
+access-list EAC_VPN extended permit ip any host 10.240.207.42 
+access-list EAC_VPN extended permit ip any host 10.226.1.58 
+access-list EAC_VPN extended permit ip any host 10.251.26.25 
+access-list EAC_VPN extended permit ip any host 10.234.1.88 
+access-list EAC_VPN extended permit ip any host 10.163.97.37 
+access-list EAC_VPN extended permit ip any host 10.245.49.48 
+access-list EAC_VPN extended permit ip any host 10.247.229.43 
+access-list EAC_VPN extended permit ip any host 10.250.65.25 
+access-list EAC_VPN extended permit ip any host 10.242.225.43 
+access-list EAC_VPN extended permit ip any host 10.139.97.51 
+access-list EAC_VPN extended permit ip any host 10.252.209.12 
+access-list EAC_VPN extended permit ip any host 10.139.129.21 
+access-list EAC_VPN extended permit ip any host 10.248.173.20 
+access-list EAC_VPN extended permit ip any host 10.239.225.22 
+access-list EAC_VPN extended permit ip any host 10.252.25.9 
+access-list EAC_VPN extended permit ip any host 10.184.161.44 
+access-list EAC_VPN extended permit ip any host 10.161.72.22 
+access-list EAC_VPN extended permit ip any host 10.228.1.28 
+access-list EAC_VPN extended permit ip any host 10.243.161.46 
+access-list EAC_VPN extended permit ip any host 10.16.8.35 
+access-list EAC_VPN extended permit ip any host 10.164.129.23 
+access-list EAC_VPN extended permit ip any host 10.245.22.30 
+access-list EAC_VPN extended permit ip any host 10.147.84.24 
+access-list EAC_VPN extended permit ip any host 10.233.65.151 
+access-list EAC_VPN extended permit ip any host 10.224.4.41 
+access-list EAC_VPN extended permit ip any host 10.87.32.24 
+access-list EAC_VPN extended permit ip any host 10.87.32.25 
+access-list EAC_VPN extended permit ip any host 10.87.32.26 
+access-list EAC_VPN extended permit ip any host 10.86.156.15 
+access-list EAC_VPN extended permit ip any host 10.86.156.16 
+access-list EAC_VPN extended permit ip any host 10.9.244.22 
+access-list EAC_VPN extended permit ip any host 10.38.193.28 
+access-list EAC_VPN extended permit ip any host 10.226.65.34 
+access-list EAC_VPN extended permit ip any host 10.109.65.21 
+access-list EAC_VPN extended permit ip any host 10.146.116.33 
+access-list EAC_VPN extended permit ip any host 10.191.29.12 
+access-list EAC_VPN extended permit ip any host 10.191.29.238 
+access-list EAC_VPN extended permit ip any host 10.191.30.191 
+access-list EAC_VPN extended permit ip any host 10.149.52.44 
+access-list EAC_VPN extended permit ip any host 10.109.81.21 
+access-list EAC_VPN extended permit ip any host 10.209.129.53 
+access-list EAC_VPN extended permit ip any host 10.238.97.42 
+access-list EAC_VPN extended permit ip any host 10.14.180.38 
+access-list EAC_VPN extended permit ip any host 10.243.177.37 
+access-list EAC_VPN extended permit ip any host 10.241.161.37 
+access-list EAC_VPN extended permit ip any host 10.248.81.29 
+access-list EAC_VPN extended permit ip any host 10.239.97.37 
+access-list EAC_VPN extended permit ip any host 10.164.17.37 
+access-list EAC_VPN extended permit ip any host 10.232.193.35 
+access-list EAC_VPN extended permit ip any host 10.233.65.37 
+access-list EAC_VPN extended permit ip any host 10.249.217.182 
+access-list EAC_VPN extended permit ip any host 10.56.212.42 
+access-list EAC_VPN extended permit ip any host 10.234.193.37 
+access-list EAC_VPN extended permit ip any host 10.241.129.42 
+access-list EAC_VPN extended permit ip any host 10.242.33.42 
+access-list EAC_VPN extended permit ip any host 10.82.52.58 
+access-list EAC_VPN extended permit ip any host 10.235.3.43 
+access-list EAC_VPN extended permit ip any host 10.163.241.15 
+access-list EAC_VPN extended permit ip any host 10.163.161.37 
+access-list EAC_VPN extended permit ip any host 10.87.143.70 
+access-list EAC_VPN extended permit ip any host 10.165.193.18 
+access-list EAC_VPN extended permit ip any host 10.240.33.62 
+access-list EAC_VPN extended permit ip any host 10.251.169.31 
+access-list EAC_VPN extended permit ip any host 10.242.144.34 
+access-list EAC_VPN extended permit ip any host 10.252.201.25 
+access-list EAC_VPN extended permit ip any host 10.250.137.30 
+access-list EAC_VPN extended permit ip any host 10.87.33.107 
+access-list EAC_VPN extended permit ip any host 10.87.33.137 
+access-list EAC_VPN extended permit ip any host 10.87.33.138 
+access-list EAC_VPN extended permit ip any host 10.87.33.139 
+access-list EAC_VPN extended permit ip any host 10.87.33.140 
+access-list EAC_VPN extended permit ip any host 10.86.153.34 
+access-list EAC_VPN extended permit ip any host 10.86.153.73 
+access-list EAC_VPN extended permit ip any host 10.86.153.77 
+access-list EAC_VPN extended permit ip any host 10.86.153.105 
+access-list EAC_VPN extended permit ip any host 10.86.153.130 
+access-list EAC_VPN extended permit ip any host 10.83.161.24 
+access-list EAC_VPN extended permit ip any host 10.239.1.31 
+access-list EAC_VPN extended permit ip any host 10.231.223.79 
+access-list EAC_VPN extended permit ip any host 10.83.180.54 
+access-list EAC_VPN extended permit ip any host 10.153.180.45 
+access-list EAC_VPN extended permit ip any host 10.87.145.188 
+access-list EAC_VPN extended permit ip any host 10.87.145.190 
+access-list EAC_VPN extended permit ip any host 10.249.145.32 
+access-list EAC_VPN extended permit ip any host 10.236.129.27 
+access-list EAC_VPN extended permit ip any host 10.82.52.36 
+access-list EAC_VPN extended permit ip any host 10.250.17.16 
+access-list EAC_VPN extended permit ip any host 10.165.65.20 
+access-list EAC_VPN extended permit ip any host 10.230.1.20 
+access-list EAC_VPN extended permit ip any host 10.230.1.21 
+access-list EAC_VPN extended permit ip any host 10.137.24.45 
+access-list EAC_VPN extended permit ip any host 10.111.29.142 
+access-list EAC_VPN extended permit ip any host 10.111.29.37 
+access-list EAC_VPN extended permit ip any host 10.111.27.14 
+access-list EAC_VPN extended permit ip any host 10.111.27.147 
+access-list EAC_VPN extended permit ip any host 10.75.1.92 
+access-list EAC_VPN extended permit ip any host 10.194.129.49 
+access-list EAC_VPN extended permit ip any host 10.194.129.50 
+access-list EAC_VPN extended permit ip any host 10.165.1.37 
+access-list EAC_VPN extended permit ip any host 10.165.17.37 
+access-list EAC_VPN extended permit ip any host 10.193.1.46 
+access-list EAC_VPN extended permit ip any host 10.193.1.47 
+access-list EAC_VPN extended permit ip any host 10.211.65.16 
+access-list EAC_VPN extended permit ip any host 10.211.129.20 
+access-list EAC_VPN extended permit ip any host 10.211.129.16 
+access-list EAC_VPN extended permit ip any host 10.210.65.30 
+access-list EAC_VPN extended permit ip any host 10.140.193.24 
+access-list EAC_VPN extended permit ip any host 10.140.225.16 
+access-list EAC_VPN extended permit ip any host 10.211.1.22 
+access-list EAC_VPN extended permit ip any host 10.141.161.30 
+access-list EAC_VPN extended permit ip any host 10.210.193.16 
+access-list EAC_VPN extended permit ip any host 10.210.129.51 
+access-list EAC_VPN extended permit ip any host 10.87.12.9 
+access-list EAC_VPN extended permit ip any host 10.31.193.40 
+access-list EAC_VPN extended permit ip any host 10.31.182.74 
+access-list EAC_VPN extended permit ip any host 10.31.129.31 
+access-list EAC_VPN extended permit ip any host 10.31.129.32 
+access-list EAC_VPN extended permit ip any host 10.130.1.41 
+access-list EAC_VPN extended permit ip any host 10.130.1.42 
+access-list EAC_VPN extended permit ip any host 10.228.129.64 
+access-list EAC_VPN extended permit ip any host 10.228.129.65 
+access-list EAC_VPN extended permit ip any host 10.210.218.34 
+access-list EAC_VPN extended permit ip any host 10.140.234.47 
+access-list EAC_VPN extended permit ip any host 10.211.1.26 
+access-list EAC_VPN extended permit ip any host 10.210.90.55 
+access-list EAC_VPN extended permit ip any host 10.141.170.32 
+access-list EAC_VPN extended permit ip any host 10.140.202.32 
+access-list EAC_VPN extended permit ip any host 10.211.90.32 
+access-list EAC_VPN extended permit ip any host 10.210.154.37 
+access-list EAC_VPN extended permit ip any host 10.212.1.31 
+access-list EAC_VPN extended permit ip any host 10.212.1.35 
+access-list EAC_VPN extended permit ip any host 10.254.89.31 
+access-list EAC_VPN extended permit ip any host 10.38.193.31 
+access-list EAC_VPN extended permit ip any host 10.244.161.32 
+access-list EAC_VPN extended permit ip any host 10.250.41.30 
+access-list EAC_VPN extended permit ip any host 10.177.106.57 
+access-list EAC_VPN extended permit ip any host 10.177.106.62 
+access-list EAC_VPN extended permit ip any host 10.106.64.201 
+access-list EAC_VPN extended permit ip any host 10.106.64.202 
+access-list EAC_VPN extended permit ip any host 10.177.106.71 
+access-list EAC_VPN extended permit ip any host 10.106.64.203 
+access-list EAC_VPN extended permit ip any host 10.177.106.73 
+access-list EAC_VPN extended permit ip any host 10.106.64.204 
+access-list EAC_VPN extended permit ip any host 10.106.64.205 
+access-list EAC_VPN extended permit ip any host 10.106.64.206 
+access-list EAC_VPN extended permit ip any host 10.106.68.73 
+access-list EAC_VPN extended permit ip any host 10.106.68.74 
+access-list EAC_VPN extended permit ip any host 10.177.106.80 
+access-list EAC_VPN extended permit ip any host 10.177.106.81 
+access-list EAC_VPN extended permit ip any host 10.177.106.82 
+access-list EAC_VPN extended permit ip any host 10.177.106.83 
+access-list EAC_VPN extended permit ip any host 10.106.68.87 
+access-list EAC_VPN extended permit ip any host 10.177.106.85 
+access-list EAC_VPN extended permit ip any host 10.106.68.88 
+access-list EAC_VPN extended permit ip any host 10.177.106.87 
+access-list EAC_VPN extended permit ip any host 10.177.106.88 
+access-list EAC_VPN extended permit ip any host 10.177.106.89 
+access-list EAC_VPN extended permit ip any host 10.177.106.90 
+access-list EAC_VPN extended permit ip any host 10.177.106.92 
+access-list EAC_VPN extended permit ip any host 10.123.169.187 
+access-list EAC_VPN extended permit ip any host 10.210.1.31 
+access-list EAC_VPN extended permit ip any host 10.210.1.38 
+access-list EAC_VPN extended permit ip any host 10.210.1.40 
+access-list EAC_VPN extended permit ip any host 10.249.137.19 
+access-list EAC_VPN extended permit ip any host 10.209.193.31 
+access-list EAC_VPN extended permit ip any host 10.209.193.38 
+access-list EAC_VPN extended permit ip any host 10.209.1.37 
+access-list EAC_VPN extended permit ip any host 10.114.232.102 
+access-list EAC_VPN extended permit ip any host 10.249.225.17 
+access-list EAC_VPN extended permit ip any host 10.209.1.42 
+access-list EAC_VPN extended permit ip any host 10.195.65.16 
+access-list EAC_VPN extended permit ip any host 10.195.65.18 
+access-list EAC_VPN extended permit ip any host 10.211.193.31 
+access-list EAC_VPN extended permit ip any host 10.196.1.35 
+access-list EAC_VPN extended permit ip any host 10.196.1.37 
+access-list EAC_VPN extended permit ip any host 10.38.65.31 
+access-list EAC_VPN extended permit ip any host 10.38.65.33 
+access-list EAC_VPN extended permit ip any host 10.241.193.31 
+access-list EAC_VPN extended permit ip any host 10.249.185.30 
+access-list EAC_VPN extended permit ip any host 10.75.65.51 
+access-list EAC_VPN extended permit ip any host 10.254.1.33 
+access-list EAC_VPN extended permit ip any host 10.166.129.19 
+access-list EAC_VPN extended permit ip any host 10.254.9.14 
+access-list EAC_VPN extended permit ip any host 10.166.113.16 
+access-list EAC_VPN extended permit ip any host 10.255.241.17 
+access-list EAC_VPN extended permit ip any host 10.216.129.31 
+access-list EAC_VPN extended permit ip any host 10.220.33.31 
+access-list EAC_VPN extended permit ip any host 10.216.210.49 
+access-list EAC_VPN extended permit ip any host 10.220.137.49 
+access-list EAC_VPN extended permit ip any host 10.230.129.31 
+access-list EAC_VPN extended permit ip any host 10.216.241.31 
+access-list EAC_VPN extended permit ip any host 10.216.161.31 
+access-list EAC_VPN extended permit ip any host 10.217.97.29 
+access-list EAC_VPN extended permit ip any host 10.220.129.31 
+access-list EAC_VPN extended permit ip any host 10.216.145.31 
+access-list EAC_VPN extended permit ip any host 10.220.25.31 
+access-list EAC_VPN extended permit ip any host 10.171.161.16 
+access-list EAC_VPN extended permit ip any host 10.216.177.31 
+access-list EAC_VPN extended permit ip any host 10.216.225.31 
+access-list EAC_VPN extended permit ip any host 10.247.65.14 
+access-list EAC_VPN extended permit ip any host 10.220.121.31 
+access-list EAC_VPN extended permit ip any host 10.248.233.31 
+access-list EAC_VPN extended permit ip any host 10.220.113.31 
+access-list EAC_VPN extended permit ip any host 10.220.1.31 
+access-list EAC_VPN extended permit ip any host 10.220.73.41 
+access-list EAC_VPN extended permit ip any host 10.249.81.25 
+access-list EAC_VPN extended permit ip any host 10.254.49.35 
+access-list EAC_VPN extended permit ip any host 10.142.193.17 
+access-list EAC_VPN extended permit ip any host 10.254.73.16 
+access-list EAC_VPN extended permit ip any host 10.166.241.20 
+access-list EAC_VPN extended permit ip any host 10.213.1.20 
+access-list EAC_VPN extended permit ip any host 10.39.129.20 
+access-list EAC_VPN extended permit ip any host 10.39.65.20 
+access-list EAC_VPN extended permit ip any host 10.166.97.20 
+access-list EAC_VPN extended permit ip any host 10.220.81.31 
+access-list EAC_VPN extended permit ip any host 10.220.17.41 
+access-list EAC_VPN extended permit ip any host 10.220.145.27 
+access-list EAC_VPN extended permit ip any host 10.248.137.41 
+access-list EAC_VPN extended permit ip any host 10.220.9.31 
+access-list EAC_VPN extended permit ip any host 10.246.153.42 
+access-list EAC_VPN extended permit ip any host 10.254.65.31 
+access-list EAC_VPN extended permit ip any host 10.40.1.16 
+access-list EAC_VPN extended permit ip any host 10.40.1.18 
+access-list EAC_VPN extended permit ip any host 10.39.1.17 
+access-list EAC_VPN extended permit ip any host 10.164.33.20 
+access-list EAC_VPN extended permit ip any host 10.166.177.17 
+access-list EAC_VPN extended permit ip any host 10.166.225.17 
+access-list EAC_VPN extended permit ip any host 10.246.97.19 
+access-list EAC_VPN extended permit ip any host 10.253.201.32 
+access-list EAC_VPN extended permit ip any host 10.166.49.19 
+access-list EAC_VPN extended permit ip any host 10.253.241.23 
+access-list EAC_VPN extended permit ip any host 10.247.57.31 
+access-list EAC_VPN extended permit ip any host 10.253.233.42 
+access-list EAC_VPN extended permit ip any host 10.254.17.66 
+access-list EAC_VPN extended permit ip any host 10.213.129.18 
+access-list EAC_VPN extended permit ip any host 10.213.129.20 
+access-list EAC_VPN extended permit ip any host 10.242.193.31 
+access-list EAC_VPN extended permit ip any host 10.247.33.41 
+access-list EAC_VPN extended permit ip any host 10.220.97.31 
+access-list EAC_VPN extended permit ip any host 10.253.209.31 
+access-list EAC_VPN extended permit ip any host 10.249.249.26 
+access-list EAC_VPN extended permit ip any host 10.159.212.31 
+access-list EAC_VPN extended permit ip any host 10.230.193.36 
+access-list EAC_VPN extended permit ip any host 10.230.193.33 
+access-list EAC_VPN extended permit ip any host 10.131.1.35 
+access-list EAC_VPN extended permit ip any host 10.131.1.42 
+access-list EAC_VPN extended permit ip any host 10.248.185.21 
+access-list EAC_VPN extended permit ip any host 10.249.49.30 
+access-list EAC_VPN extended permit ip any host 10.249.41.30 
+access-list EAC_VPN extended permit ip any host 10.166.97.22 
+access-list EAC_VPN extended permit ip any host 10.217.193.19 
+access-list EAC_VPN extended permit ip any host 10.166.209.20 
+access-list EAC_VPN extended permit ip any host 10.166.209.21 
+access-list EAC_VPN extended permit ip any host 10.139.1.20 
+access-list EAC_VPN extended permit ip any host 10.87.141.216 
+access-list EAC_VPN extended permit ip any host 10.87.141.238 
+access-list EAC_VPN extended permit ip any host 10.86.12.149 
+access-list EAC_VPN extended permit ip any host 10.86.12.162 
+access-list EAC_VPN extended permit ip any host 10.245.97.22 
+access-list EAC_VPN extended permit ip any host 10.253.185.20 
+access-list EAC_VPN extended permit ip any host 10.217.225.17 
+access-list EAC_VPN extended permit ip any host 10.40.1.22 
+access-list EAC_VPN extended permit ip any host 10.241.193.22 
+access-list EAC_VPN extended permit ip any host 10.83.160.174 
+access-list EAC_VPN extended permit ip any host 10.230.129.25 
+access-list EAC_VPN extended permit ip any host 10.106.146.181 
+access-list EAC_VPN extended permit ip any host 10.87.60.254 
+access-list EAC_VPN extended permit ip any host 10.204.66.31 
+access-list EAC_VPN extended permit ip any host 10.86.141.94 
+access-list EAC_VPN extended permit ip any host 10.226.129.20 
+access-list EAC_VPN extended permit ip any host 10.194.202.22 
+access-list EAC_VPN extended permit ip any host 10.194.119.22 
+access-list EAC_VPN extended permit ip any host 10.216.129.20 
+access-list EAC_VPN extended permit ip any host 10.160.7.22 
+access-list EAC_VPN extended permit ip any host 10.246.97.23 
+access-list EAC_VPN extended permit ip any host 10.217.177.17 
+access-list EAC_VPN extended permit ip any host 10.248.201.12 
+access-list EAC_VPN extended permit ip any host 10.164.33.24 
+access-list EAC_VPN extended permit ip any host 10.216.225.35 
+access-list EAC_VPN extended permit ip any host 10.142.193.37 
+access-list EAC_VPN extended permit ip any host 10.216.161.35 
+access-list EAC_VPN extended permit ip any host 10.220.25.35 
+access-list EAC_VPN extended permit ip any host 10.216.145.35 
+access-list EAC_VPN extended permit ip any host 10.220.17.45 
+access-list EAC_VPN extended permit ip any host 10.216.241.35 
+access-list EAC_VPN extended permit ip any host 10.248.233.35 
+access-list EAC_VPN extended permit ip any host 10.105.17.12 
+access-list EAC_VPN extended permit ip any host 10.250.105.8 
+access-list EAC_VPN extended permit ip any host 10.248.33.30 
+access-list EAC_VPN extended permit ip any host 10.74.1.33 
+access-list EAC_VPN extended permit ip any host 10.74.1.34 
+access-list EAC_VPN extended permit ip any host 10.246.153.23 
+access-list EAC_VPN extended permit ip any host 10.211.193.27 
+access-list EAC_VPN extended permit ip any host 10.210.1.27 
+access-list EAC_VPN extended permit ip any host 10.247.65.32 
+access-list EAC_VPN extended permit ip any host 10.83.160.171 
+access-list EAC_VPN extended permit ip any host 10.211.193.30 
+access-list EAC_VPN extended permit ip any host 10.249.233.51 
+access-list EAC_VPN extended permit ip any host 10.22.1.20 
+access-list EAC_VPN extended permit ip any host 10.249.249.32 
+access-list EAC_VPN extended permit ip any host 10.250.17.14 
+access-list EAC_VPN extended permit ip any host 10.166.129.23 
+access-list EAC_VPN extended permit ip any host 10.241.97.32 
+access-list EAC_VPN extended permit ip any host 10.218.65.31 
+access-list EAC_VPN extended permit ip any host 10.247.193.12 
+access-list EAC_VPN extended permit ip any host 10.130.193.25 
+access-list EAC_VPN extended permit ip any host 10.130.193.26 
+access-list EAC_VPN extended permit ip any host 10.251.25.21 
+access-list EAC_VPN extended permit ip any host 10.236.65.17 
+access-list EAC_VPN extended permit ip any host 10.83.160.173 
+access-list EAC_VPN extended permit ip any host 10.236.65.20 
+access-list EAC_VPN extended permit ip any host 10.209.193.27 
+access-list EAC_VPN extended permit ip any host 10.209.193.30 
+access-list EAC_VPN extended permit ip any host 10.217.33.22 
+access-list EAC_VPN extended permit ip any host 10.243.33.46 
+access-list EAC_VPN extended permit ip any host 10.41.1.31 
+access-list EAC_VPN extended permit ip any host 10.243.1.31 
+access-list EAC_VPN extended permit ip any host 10.41.1.20 
+access-list EAC_VPN extended permit ip any host 10.163.49.31 
+access-list EAC_VPN extended permit ip any host 10.213.193.40 
+access-list EAC_VPN extended permit ip any host 10.213.193.33 
+access-list EAC_VPN extended permit ip any host 10.254.65.26 
+access-list EAC_VPN extended permit ip any host 10.250.65.17 
+access-list EAC_VPN extended permit ip any host 10.105.129.30 
+access-list EAC_VPN extended permit ip any host 10.86.141.45 
+access-list EAC_VPN extended permit ip any host 10.86.142.140 
+access-list EAC_VPN extended permit ip any host 10.86.142.151 
+access-list EAC_VPN extended permit ip any host 10.86.142.152 
+access-list EAC_VPN extended permit ip any host 10.86.142.157 
+access-list EAC_VPN extended permit ip any host 10.204.67.205 
+access-list EAC_VPN extended permit ip any host 10.87.60.31 
+access-list EAC_VPN extended permit ip any host 10.87.60.99 
+access-list EAC_VPN extended permit ip any host 10.87.60.110 
+access-list EAC_VPN extended permit ip any host 10.87.60.171 
+access-list EAC_VPN extended permit ip any host 10.87.60.248 
+access-list EAC_VPN extended permit ip any host 10.87.153.58 
+access-list EAC_VPN extended permit ip any host 10.247.73.39 
+access-list EAC_VPN extended permit ip any host 10.156.65.23 
+access-list EAC_VPN extended permit ip any host 10.156.65.26 
+access-list EAC_VPN extended permit ip any host 10.156.129.17 
+access-list EAC_VPN extended permit ip any host 10.92.20.56 
+access-list EAC_VPN extended permit ip any host 10.232.129.73 
+access-list EAC_VPN extended permit ip any host 10.233.129.29 
+access-list EAC_VPN extended permit ip any host 10.235.3.45 
+access-list EAC_VPN extended permit ip any host 10.232.1.35 
+access-list EAC_VPN extended permit ip any host 10.236.1.30 
+access-list EAC_VPN extended permit ip any host 10.216.193.25 
+access-list EAC_VPN extended permit ip any host 10.156.129.22 
+access-list EAC_VPN extended permit ip any host 10.15.84.38 
+access-list EAC_VPN extended permit ip any host 10.234.65.45 
+access-list EAC_VPN extended permit ip any host 10.237.65.104 
+access-list EAC_VPN extended permit ip any host 10.147.36.48 
+access-list EAC_VPN extended permit ip any host 10.235.129.95 
+access-list EAC_VPN extended permit ip any host 10.237.193.51 
+access-list EAC_VPN extended permit ip any host 10.81.184.41 
+access-list EAC_VPN extended permit ip any host 10.230.193.39 
+access-list EAC_VPN extended permit ip any host 10.82.52.38 
+access-list EAC_VPN extended permit ip any host 10.228.1.31 
+access-list EAC_VPN extended permit ip any host 10.241.161.23 
+access-list EAC_VPN extended permit ip any host 10.137.24.46 
+access-list EAC_VPN extended permit ip any host 10.163.193.17 
+access-list EAC_VPN extended permit ip any host 10.243.129.60 
+access-list EAC_VPN extended permit ip any host 10.243.129.61 
+access-list EAC_VPN extended permit ip any host 10.40.1.77 
+access-list EAC_VPN extended permit ip any host 10.166.97.77 
+access-list EAC_VPN extended permit ip any host 10.243.129.177 
+access-list EAC_VPN extended permit ip any host 10.241.33.77 
+access-list EAC_VPN extended permit ip any host 10.239.34.77 
+access-list EAC_VPN extended permit ip any host 10.41.129.30 
+access-list EAC_VPN extended permit ip any host 10.41.129.26 
+access-list EAC_VPN extended permit ip any host 10.219.81.31 
+access-list EAC_VPN extended permit ip any host 10.211.1.32 
+access-list EAC_VPN extended permit ip any host 10.154.8.40 
+access-list EAC_VPN extended permit ip any host 10.164.225.39 
+access-list EAC_VPN extended permit ip any host 10.244.17.50 
+access-list EAC_VPN extended permit ip any host 10.140.33.32 
+access-list EAC_VPN extended permit ip any host 10.140.97.39 
+access-list EAC_VPN extended permit ip any host 10.83.161.30 
+access-list EAC_VPN extended permit ip any host 10.83.160.40 
+access-list EAC_VPN extended permit ip any host 10.243.33.54 
+access-list EAC_VPN extended permit ip any host 10.142.193.38 
+access-list EAC_VPN extended permit ip any host 10.143.145.19 
+access-list EAC_VPN extended permit ip any host 10.164.1.21 
+access-list EAC_VPN extended permit ip any host 10.164.1.16 
+access-list EAC_VPN extended permit ip any host 10.157.1.33 
+access-list EAC_VPN extended permit ip any host 10.157.1.41 
+access-list EAC_VPN extended permit ip any host 10.131.193.20 
+access-list EAC_VPN extended permit ip any host 10.143.129.31 
+access-list EAC_VPN extended permit ip any host 10.165.129.31 
+access-list EAC_VPN remark *** APPLE CASPER ***
+access-list EAC_VPN extended permit ip any host 10.48.44.123 
+access-list EAC_VPN extended permit ip any host 10.48.36.125 
+access-list EAC_VPN extended permit ip any host 10.178.184.10 
+access-list EAC_VPN extended permit ip any host 10.178.184.11 
+access-list EAC_VPN extended permit ip any host 10.178.184.12 
+access-list EAC_VPN extended permit ip any host 10.178.184.13 
+access-list EAC_VPN extended permit ip any host 10.178.184.14 
+access-list EAC_VPN extended permit ip any host 10.178.184.15 
+access-list EAC_VPN extended permit ip any host 10.86.18.73 
+access-list EAC_VPN extended permit ip any host 10.86.18.75 
+access-list EAC_VPN extended permit ip any host 10.86.142.87 
+access-list EAC_VPN extended permit ip any host 10.86.142.139 
+access-list EAC_VPN extended permit ip any host 10.87.153.60 
+access-list EAC_VPN extended permit ip any host 10.106.147.163 
+access-list EAC_VPN extended permit ip any host 10.87.61.16 
+access-list EAC_VPN extended permit ip any host 10.87.153.59 
+access-list EAC_VPN remark *** APPLE MGMT JUMP BOXES ***
+access-list EAC_VPN extended permit ip any host 10.83.138.21 
+access-list EAC_VPN extended permit ip any host 10.83.138.22 
+access-list EAC_VPN remark *** BLUECOAT WEBSERVERS PAC FILE ***
+access-list EAC_VPN extended permit ip any host 10.98.2.24 
+access-list EAC_VPN extended permit ip any host 10.188.0.29 
+access-list EAC_VPN remark *** JAMF PRO/CASPER DEV ***
+access-list EAC_VPN extended permit ip any host 10.48.8.48 
+access-list EAC_VPN extended permit ip any host 10.106.111.34 
+access-list EAC_VPN extended permit ip any host 10.106.111.35 
+access-list EAC_VPN extended permit ip any host 10.106.111.36 
+access-list EAC_VPN extended permit ip any host 10.106.111.37 
+access-list EAC_VPN extended permit ip any host 10.106.111.38 
+access-list EAC_VPN extended permit ip any host 10.106.111.39 
+access-list EAC_VPN remark *** APPLE PROD DISTRIBUTION POINTS ***
+access-list EAC_VPN extended permit ip any host 10.212.1.77 
+access-list EAC_VPN extended permit ip any host 10.131.193.31 
+access-list EAC_VPN extended permit ip any host 10.238.65.77 
+access-list EAC_VPN extended permit ip any host 10.194.129.52 
+access-list EAC_VPN extended permit ip any host 10.196.1.22 
+access-list EAC_VPN extended permit ip any host 10.143.114.33 
+access-list EAC_VPN extended permit ip any host 10.143.112.33 
+access-list EAC_VPN extended permit ip any host 10.75.161.77 
+access-list EAC_VPN extended permit ip any host 10.75.161.37 
+access-list EAC_VPN remark *** APPLE APN ***
+access-list EAC_VPN extended permit tcp any 17.57.128.0 255.255.128.0 eq https 
+access-list EAC_VPN extended permit tcp any 17.57.128.0 255.255.128.0 eq 5223 
+access-list EAC_VPN extended permit tcp any 17.57.128.0 255.255.128.0 range 2195 2196 
+access-list EAC_VPN extended permit tcp any 17.188.128.0 255.255.128.0 eq https 
+access-list EAC_VPN extended permit tcp any 17.188.128.0 255.255.128.0 eq 5223 
+access-list EAC_VPN extended permit tcp any 17.188.128.0 255.255.128.0 range 2195 2196 
+access-list EAC_VPN extended permit tcp any 17.242.0.0 255.255.0.0 eq https 
+access-list EAC_VPN extended permit tcp any 17.242.0.0 255.255.0.0 eq 5223 
+access-list EAC_VPN extended permit tcp any 17.242.0.0 255.255.0.0 range 2195 2196 
+access-list EAC_VPN extended permit tcp any 17.249.0.0 255.255.0.0 eq https 
+access-list EAC_VPN extended permit tcp any 17.249.0.0 255.255.0.0 eq 5223 
+access-list EAC_VPN extended permit tcp any 17.249.0.0 255.255.0.0 range 2195 2196 
+access-list EAC_VPN extended permit tcp any 17.252.0.0 255.255.0.0 eq https 
+access-list EAC_VPN extended permit tcp any 17.252.0.0 255.255.0.0 eq 5223 
+access-list EAC_VPN extended permit tcp any 17.252.0.0 255.255.0.0 range 2195 2196 
+access-list EAC_VPN remark *** SEP ***
+access-list EAC_VPN extended permit tcp any host 10.106.186.132 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.184.133 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.166.128 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.166.134 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.146.133 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.146.134 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.186.135 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.186.139 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.182.133 eq 8014 
+access-list EAC_VPN extended permit tcp any host 10.106.166.135 eq 8014 
+access-list EAC_VPN extended permit ip any host 10.27.4.76 
+access-list EAC_VPN remark *** WEB JETADMIN ***
+access-list EAC_VPN extended permit ip any host 10.87.14.177 
+access-list EAC_VPN extended permit ip any host 10.87.18.10 
+access-list EAC_VPN extended permit ip any host 10.86.146.21 
+access-list EAC_VPN extended permit ip any host 10.87.149.198 
+access-list EAC_VPN remark *** MS DOMAIN CONTROLLERS ***
+access-list EAC_VPN extended permit ip any host 10.233.65.68 
+access-list EAC_VPN extended permit ip any host 10.226.1.38 
+access-list EAC_VPN extended permit ip any host 10.237.65.217 
+access-list EAC_VPN extended permit ip any host 10.237.65.125 
+access-list EAC_VPN extended permit ip any host 10.56.84.39 
+access-list EAC_VPN extended permit ip any host 10.75.1.39 
+access-list EAC_VPN extended permit ip any host 10.234.65.39 
+access-list EAC_VPN extended permit ip any host 10.82.52.39 
+access-list EAC_VPN extended permit ip any host 10.171.92.39 
+access-list EAC_VPN extended permit ip any host 10.15.84.39 
+access-list EAC_VPN extended permit ip any host 10.246.209.50 
+access-list EAC_VPN extended permit ip any host 10.137.24.39 
+access-list EAC_VPN extended permit ip any host 10.147.36.39 
+access-list EAC_VPN extended permit ip any host 10.209.129.39 
+access-list EAC_VPN extended permit ip any host 10.232.129.39 
+access-list EAC_VPN extended permit ip any host 10.178.244.41 
+access-list EAC_VPN extended permit ip any host 10.193.1.116 
+access-list EAC_VPN extended permit ip any host 10.228.129.56 
+access-list EAC_VPN extended permit ip any host 10.204.132.37 
+access-list EAC_VPN extended permit ip any host 10.204.132.38 
+access-list EAC_VPN extended permit ip any host 10.205.36.41 
+access-list EAC_VPN extended permit ip any host 10.205.36.40 
+access-list EAC_VPN extended permit ip any host 10.179.104.232 
+access-list EAC_VPN extended permit ip any host 10.179.104.233 
+access-list EAC_VPN extended permit ip any host 10.179.104.234 
+access-list EAC_VPN extended permit ip any host 10.179.104.235 
+access-list EAC_VPN extended permit ip any host 10.179.9.197 
+access-list EAC_VPN extended permit ip any host 10.106.20.103 
+access-list EAC_VPN extended permit ip any host 10.106.20.104 
+access-list EAC_VPN extended permit ip any host 10.106.20.105 
+access-list EAC_VPN extended permit ip any host 10.106.20.106 
+access-list EAC_VPN extended permit ip any host 10.106.20.107 
+access-list EAC_VPN extended permit ip any host 10.106.20.108 
+access-list EAC_VPN extended permit ip any host 10.106.20.109 
+access-list EAC_VPN extended permit ip any host 10.122.40.30 
+access-list EAC_VPN extended permit ip any host 10.122.34.48 
+access-list EAC_VPN extended permit ip any host 10.122.34.61 
+access-list EAC_VPN extended permit ip any host 10.122.34.62 
+access-list EAC_VPN extended permit ip any host 10.122.34.73 
+access-list EAC_VPN extended permit ip any host 10.122.34.76 
+access-list EAC_VPN extended permit ip any host 10.122.34.77 
+access-list EAC_VPN extended permit ip any host 10.114.232.67 
+access-list EAC_VPN extended permit ip any host 10.114.232.68 
+access-list EAC_VPN extended permit ip any host 10.114.232.70 
+access-list EAC_VPN extended permit ip any host 10.122.34.78 
+access-list EAC_VPN extended permit ip any host 10.122.34.96 
+access-list EAC_VPN extended permit ip any host 10.106.20.110 
+access-list EAC_VPN extended permit ip any host 10.106.20.111 
+access-list EAC_VPN extended permit ip any host 10.114.232.71 
+access-list EAC_VPN extended permit ip any host 10.114.232.72 
+access-list EAC_VPN extended permit ip any host 10.106.20.123 
+access-list EAC_VPN extended permit ip any host 10.106.20.124 
+access-list EAC_VPN extended permit ip any host 10.122.92.30 
+access-list EAC_VPN extended permit ip any host 10.122.92.38 
+access-list EAC_VPN extended permit ip any host 10.122.200.42 
+access-list EAC_VPN extended permit ip any host 10.106.20.125 
+access-list EAC_VPN extended permit ip any host 10.106.20.126 
+access-list EAC_VPN extended permit ip any host 10.106.20.127 
+access-list EAC_VPN extended permit ip any host 10.106.20.128 
+access-list EAC_VPN extended permit ip any host 10.106.20.129 
+access-list EAC_VPN extended permit ip any host 10.106.20.130 
+access-list EAC_VPN extended permit ip any host 10.114.232.74 
+access-list EAC_VPN extended permit ip any host 10.192.33.48 
+access-list EAC_VPN extended permit ip any host 10.193.1.134 
+access-list EAC_VPN extended permit ip any host 10.210.1.46 
+access-list EAC_VPN extended permit ip any host 10.75.1.80 
+access-list EAC_VPN extended permit ip any host 10.86.14.18 
+access-list EAC_VPN extended permit ip any host 10.86.15.22 
+access-list EAC_VPN extended permit ip any host 10.86.150.87 
+access-list EAC_VPN extended permit ip any host 10.204.66.70 
+access-list EAC_VPN extended permit ip any host 10.204.66.71 
+access-list EAC_VPN extended permit ip any host 10.87.144.61 
+access-list EAC_VPN extended permit ip any host 10.87.144.62 
+access-list EAC_VPN extended permit ip any host 10.87.144.65 
+access-list EAC_VPN extended permit ip any host 10.106.144.154 
+access-list EAC_VPN extended permit ip any host 10.106.144.155 
+access-list EAC_VPN extended permit ip any host 10.114.192.15 
+access-list EAC_VPN extended permit ip any host 10.114.192.17 
+access-list EAC_VPN extended permit ip any host 10.114.192.18 
+access-list EAC_VPN extended permit ip any host 10.114.192.19 
+access-list EAC_VPN extended permit ip any host 10.114.192.20 
+access-list EAC_VPN extended permit ip any host 10.106.56.174 
+access-list EAC_VPN extended permit ip any host 10.106.56.175 
+access-list EAC_VPN extended permit ip any host 10.106.56.173 
+access-list EAC_VPN extended permit ip any host 10.106.56.176 
+access-list EAC_VPN extended permit ip any host 10.106.56.177 
+access-list EAC_VPN extended permit ip any host 10.106.56.178 
+access-list EAC_VPN extended permit ip any host 10.106.56.179 
+access-list EAC_VPN extended permit ip any host 10.106.56.180 
+access-list EAC_VPN extended permit ip any host 10.106.56.181 
+access-list EAC_VPN extended permit ip any host 10.106.56.182 
+access-list EAC_VPN extended permit ip any host 10.205.120.173 
+access-list EAC_VPN extended permit ip any host 10.205.120.174 
+access-list EAC_VPN extended permit ip any host 10.205.120.175 
+access-list EAC_VPN extended permit ip any host 10.205.120.176 
+access-list EAC_VPN extended permit ip any host 10.205.120.177 
+access-list EAC_VPN extended permit ip any host 10.205.120.178 
+access-list EAC_VPN extended permit ip any host 10.205.120.179 
+access-list EAC_VPN extended permit ip any host 10.205.120.180 
+access-list EAC_VPN extended permit ip any host 10.205.120.181 
+access-list EAC_VPN extended permit ip any host 10.205.120.182 
+access-list EAC_VPN remark *** DATA CENTER HOSTING ***
+access-list EAC_VPN extended permit tcp any 161.249.0.0 255.255.0.0 eq www 
+access-list EAC_VPN extended permit tcp any 161.249.0.0 255.255.0.0 eq https 
+access-list EAC_VPN extended permit tcp any 168.183.0.0 255.255.0.0 eq www 
+access-list EAC_VPN extended permit tcp any 168.183.0.0 255.255.0.0 eq https 
+access-list EAC_VPN extended permit tcp any 149.111.0.0 255.255.0.0 eq www 
+access-list EAC_VPN extended permit tcp any 149.111.0.0 255.255.0.0 eq https 
+!
+tcp-map ALLOW-PROBES
+  tcp-options range 76 78 allow
+!
+pager lines 24
+logging enable
+logging timestamp
+logging list Standard level informational
+logging list Standard message 734003
+logging monitor critical
+logging buffered Standard
+logging trap Standard
+logging asdm informational
+logging mail critical
+logging from-address asatx777vpn01@uhc.com
+logging recipient-address uhtecc@uhc.com level critical
+logging queue 8192
+logging device-id hostname
+logging host Inside 10.223.208.74
+logging host Inside 10.176.183.3 6/1470
+logging debug-trace
+logging permit-hostdown
+logging class auth asdm debugging 
+logging class ssl trap debugging 
+logging class dap asdm debugging 
+no logging message 725010
+no logging message 725011
+no logging message 106015
+no logging message 106012
+no logging message 106006
+no logging message 313005
+no logging message 722036
+no logging message 607001
+no logging message 302015
+no logging message 302014
+no logging message 302013
+no logging message 302016
+no logging message 302021
+no logging message 302020
+mtu Inside 1500
+mtu Outside 1500
+no failover
+no failover wait-disable
+monitor-interface Inside
+monitor-interface Outside
+no monitor-interface service-module 
+icmp unreachable rate-limit 1 burst-size 1
+icmp permit any Inside
+asdm image disk0:/asdm-7151-150.bin
+no asdm history enable
+arp timeout 14400
+no arp permit-nonconnected
+arp rate-limit 32768
+route Inside 0.0.0.0 0.0.0.0 10.37.16.1 tunneled
+route Outside 0.0.0.0 0.0.0.0 161.249.72.33 1
+route Inside 10.0.0.0 255.0.0.0 10.37.16.1 1
+route Outside 10.37.32.0 255.255.240.0 161.249.72.33 1
+timeout xlate 3:00:00
+timeout pat-xlate 0:00:30
+timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
+timeout sunrpc 0:10:00 h323 0:05:00 h225 1:00:00 mgcp 0:05:00 mgcp-pat 0:05:00
+timeout sip 0:30:00 sip_media 0:02:00 sip-invite 0:03:00 sip-disconnect 0:02:00
+timeout sip-provisional-media 0:02:00 uauth 0:05:00 absolute
+timeout tcp-proxy-reassembly 0:01:00
+timeout floating-conn 0:00:00
+timeout conn-holddown 0:00:15
+timeout igp stale-route 0:01:10
+aaa-server RSA_RADIUS protocol radius
+ reactivation-mode timed
+aaa-server RSA_RADIUS (Inside) host 10.86.156.115
+ key 8Gn+yLds
+aaa-server RSA_RADIUS (Inside) host 10.87.33.2
+ key 8Gn+yLds
+aaa-server RSA_RADIUS (Inside) host 10.86.156.112
+ key 8Gn+yLds
+aaa-server RSA_RADIUS (Inside) host 10.87.33.3
+ key 8Gn+yLds
+aaa-server RSA_RADIUS (Inside) host 10.86.156.113
+ key 8Gn+yLds
+aaa-server MS_DOMAIN protocol ldap
+ reactivation-mode timed
+aaa-server MS_DOMAIN (Inside) host ad-ldap-prod.uhc.com
+ server-port 636
+ ldap-base-dn DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password kj!Bq05n
+ ldap-login-dn cn=asassl,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type microsoft
+aaa-server MS_DOMAIN (Inside) host ms.ds.uhc.com
+ server-port 636
+ ldap-base-dn DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password kj!Bq05n
+ ldap-login-dn cn=asassl,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type microsoft
+aaa-server MS_DOMAIN_2 protocol ldap
+ reactivation-mode timed
+aaa-server MS_DOMAIN_2 (Inside) host ad-ldap-prod.uhc.com
+ server-port 636
+ ldap-base-dn DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password ecX8>_uj
+ ldap-login-dn cn=vpnadprd,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type microsoft
+aaa-server MS_DOMAIN_2 (Inside) host ms.ds.uhc.com
+ server-port 636
+ ldap-base-dn DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password ecX8>_uj
+ ldap-login-dn cn=vpnadprd,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type microsoft
+aaa-server TACACS protocol tacacs+
+ reactivation-mode timed
+aaa-server TACACS (Inside) host 10.50.48.9
+ key liS0Jsq0
+aaa-server TACACS (Inside) host 10.203.36.9
+ key liS0Jsq0
+aaa-server MS_DOMAIN_USER protocol ldap
+ reactivation-mode timed
+aaa-server MS_DOMAIN_USER (Inside) host ad-ldap-prod.uhc.com
+ server-port 636
+ ldap-base-dn CN=users,DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password kj!Bq05n
+ ldap-login-dn cn=asassl,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type microsoft
+aaa-server MS_DOMAIN_USER (Inside) host ms.ds.uhc.com
+ server-port 636
+ ldap-base-dn CN=users,DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password kj!Bq05n
+ ldap-login-dn cn=asassl,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type microsoft
+aaa-server MS_DOMAIN_USER_2 protocol ldap
+ reactivation-mode timed
+aaa-server MS_DOMAIN_USER_2 (Inside) host ad-ldap-prod.uhc.com
+ server-port 636
+ ldap-base-dn CN=users,DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password ecX8>_uj
+ ldap-login-dn cn=vpnadprd,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type microsoft
+aaa-server MS_DOMAIN_USER_2 (Inside) host ms.ds.uhc.com
+ server-port 636
+ ldap-base-dn CN=users,DC=ms,DC=ds,DC=uhc,DC=com
+ ldap-scope subtree
+ ldap-naming-attribute cn
+ ldap-login-password ecX8>_uj
+ ldap-login-dn cn=vpnadprd,cn=users,dc=ms,dc=ds,dc=uhc,dc=com
+ ldap-over-ssl enable
+ server-type auto-detect
+user-identity default-domain LOCAL
+aaa authentication http console TACACS LOCAL
+aaa authentication ssh console TACACS LOCAL
+aaa authentication telnet console TACACS LOCAL
+aaa authorization command LOCAL 
+aaa accounting enable console TACACS
+aaa accounting serial console TACACS
+aaa accounting ssh console TACACS
+aaa accounting telnet console TACACS
+aaa accounting command TACACS
+no aaa authentication login-history
+http server enable 2002
+http 10.0.0.0 255.0.0.0 Inside
+snmp-server host Inside 10.106.180.164 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.114.232.100 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.115.49.45 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.117.7.102 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.119.20.110 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.122.40.69 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.123.233.17 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.123.233.18 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.177.104.240 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.177.8.141 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.177.8.142 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.177.9.12 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.177.9.13 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.177.9.14 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.178.73.53 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.179.104.156 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.86.142.14 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.86.142.15 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.87.17.213 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.87.17.216 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.87.29.104 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.106.180.180 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.177.43.102 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.179.104.240 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.119.20.68 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.119.20.70 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.125.20.33 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.125.20.35 poll community ozQMeeuN version 2c
+snmp-server host Inside 10.123.201.210 poll community ozQMeeuN version 2c
+snmp-server location 1950 North Stemmons Freeway Suite 3050, Dallas, TX, 75207, tx777, *ECC*
+snmp-server contact UHT Helpdesk, 1-888-UHT-DESK, ECC
+snmp-server community ozQMeeuN
+snmp-server enable traps ipsec start stop
+snmp-server enable traps entity config-change
+snmp-server enable traps remote-access session-threshold-exceeded
+crypto ipsec security-association pmtu-aging infinite
+crypto ca trustpoint OptumInternalPolicyCA
+ revocation-check ocsp crl
+ enrollment terminal
+ validation-usage ssl-client
+ ocsp disable-nonce
+ crl configure
+  no protocol ldap
+  no protocol scep
+crypto ca trustpoint OptumRootCA
+ revocation-check ocsp crl
+ enrollment terminal
+ validation-usage ssl-client
+ ocsp disable-nonce
+ crl configure
+  no protocol ldap
+  no protocol scep
+crypto ca trustpoint OptumInternalIssuingCA3
+ revocation-check ocsp crl
+ enrollment terminal
+ validation-usage ssl-client
+ ocsp disable-nonce
+ crl configure
+  no protocol ldap
+  no protocol scep
+crypto ca trustpoint tx777.bc.uhc.com-2022
+ fqdn tx777.bc.uhc.com
+ subject-name CN=tx777.bc.uhc.com,OU=UnitedHealth Technologies,O=UnitedHealth Group,C=US, St=Minnesota,L=Plymouth
+ keypair tx777.bc.uhc.com-2022
+ no validation-usage
+ crl configure
+crypto ca trustpoint tx777-1.bc.uhc.com-2022
+ fqdn tx777-1.bc.uhc.com
+ subject-name CN=tx777-1.bc.uhc.com,OU=UnitedHealth Technologies,O=UnitedHealth Group,C=US, St=Minnesota,L=Plymouth
+ keypair tx777-1.bc.uhc.com-2022
+ no validation-usage
+ crl configure
+crypto ca trustpool policy
+crypto ca certificate chain OptumInternalPolicyCA
+ certificate ca 730000000242668602a30748fd000000000002
+    308206ee 308204d6 a0030201 02021373 00000002 42668602 a30748fd 00000000 
+    0002300d 06092a86 4886f70d 01010b05 00305f31 0b300906 03550406 13025553 
+    31123010 06035504 0813094d 696e6e65 736f7461 31143012 06035504 07130b4d 
+    696e6e65 61706f6c 6973310e 300c0603 55040a13 054f7074 756d3116 30140603 
+    55040313 0d4f7074 756d2052 6f6f7420 4341301e 170d3135 30343136 31373133 
+    30375a17 0d323730 34313631 37323330 375a306a 310b3009 06035504 06130255 
+    53311230 10060355 04081309 4d696e6e 65736f74 61311430 12060355 0407130b 
+    4d696e6e 6561706f 6c697331 0e300c06 0355040a 13054f70 74756d31 21301f06 
+    03550403 13184f70 74756d20 496e7465 726e616c 20506f6c 69637920 43413082 
+    0222300d 06092a86 4886f70d 01010105 00038202 0f003082 020a0282 020100c1 
+    771cf2ba cd580278 913b6b8c 5a9d70f8 0507de4c 2fc48dc7 53ec0e94 ae283078 
+    7e77f978 7ffdad86 0028ab3c b7383019 af741c85 264d22f4 f1d47c0f 27246066 
+    149d84dd f65ec604 cbfc8cf3 73fa2032 14ae8bc6 f5c72f15 8212a4fd 23689896 
+    0a466d7e 11f7fa99 b6423a32 18ca969a c0228ebd 136bcd55 8b8db1f4 827a6c78 
+    0c0d5d0e d9900175 53f1a8e9 21e2f311 a1fe889a 92fe3ed5 bbe822db 2be0085d 
+    98e16f6b 97164fd6 11ad3eda 73d723e4 ca710b27 39b63ba4 cc604c84 12262eb7 
+    a3da51ec 714b9ca9 fa0a3606 05963492 df18f8b3 6ac7b5f5 15eb32c0 be669868 
+    c72df534 c2541ffd 1a3341e1 5d3588c9 78d001ed 294d54c4 96dde6b8 d12b343b 
+    f71d6805 32dc3341 470f97e5 b4bd035a f9604ff8 7c6d2ed8 ae521557 9983f055 
+    6621bacb 340aba53 7ab42e1c 33ad6692 ee1b1def 07f7b419 877eb0cd e6408706 
+    a5d4d203 d7f36763 735ab3d8 281df918 d52f3fc3 6420df8c 25b9c8b7 136d0e40 
+    451f8800 24e466e6 6b992581 f38bd016 7f7fdc36 65bf80c4 921a8481 3e89a6e1 
+    95106221 c291b94c 940b90d8 bdaa5b12 1377b092 d86ff2c8 64b60e5c e04b0069 
+    944fff97 bc9509c2 c010e7d0 1dae617e f8f51d75 e0688818 8f9682e9 7a15d54b 
+    3826f699 5349efa1 83133ed8 8545d503 5ad8ac5d 28cf1a5e 5647c4ee a57c5fa4 
+    fe8ac883 f9278cfc 18b83775 db9bb560 52bee47a 02d7fc16 beff92ca f839df02 
+    03010001 a3820196 30820192 30100609 2b060104 01823715 01040302 0100301d 
+    0603551d 0e041604 14d0fba1 13ed2363 8794180b 3ba596b1 f9166294 72307f06 
+    03551d20 04783076 3074060b 2b060104 019a7383 7d016430 65303a06 082b0601 
+    05050702 02302e1e 2c004c00 65006700 61006c00 20005000 6f006c00 69006300 
+    79002000 53007400 61007400 65006d00 65006e00 74302706 082b0601 05050702 
+    01161b68 7474703a 2f2f6f63 73702e6f 7074756d 2e636f6d 2f706b69 2f003019 
+    06092b06 01040182 37140204 0c1e0a00 53007500 62004300 41300b06 03551d0f 
+    04040302 01863012 0603551d 130101ff 04083006 0101ff02 0101301f 0603551d 
+    23041830 16801432 9885c45e 8970a94c a80d078a 9ec07bde 222ca530 3a060355 
+    1d1f0433 3031302f a02da02b 86296874 74703a2f 2f6f6373 702e6f70 74756d2e 
+    636f6d2f 706b692f 4f707475 6d526f6f 7443412e 63726c30 4506082b 06010505 
+    07010104 39303730 3506082b 06010505 07300286 29687474 703a2f2f 6f637370 
+    2e6f7074 756d2e63 6f6d2f70 6b692f4f 7074756d 526f6f74 43412e63 7274300d 
+    06092a86 4886f70d 01010b05 00038202 010077f7 d05a46b9 db43bc1a 29ba8c0b 
+    18908dcf 6bdaf20d 62fec12c 5e81e787 535cccbe 7064f3d6 e2ac6670 a9ac829c 
+    95b5ded8 7ea08f47 21a598c0 53c1cf3e 8acaa778 9d8b3251 a3c7fd30 45cac616 
+    ac14f2f8 892f65a8 45acad4a 743acfa8 0d7d0805 3af38087 1fde0d55 292d1f65 
+    a38ca1fc 8927cb33 b099d250 11e0a463 8e9ce803 b187c159 f148c03b 9d0d96bd 
+    22415cbd c5ee6e07 1595c7f7 99d335bc a8a96726 37a914d4 062d86b5 e80efb65 
+    35099cf9 91fa09b9 ef9ca6ce 60519418 5d086644 fbd0f396 6d62826c 0157bb9c 
+    4129f232 1794aa79 7d9f4bfd f4550bb2 d998c2be 520616f3 c28e09c7 a0bc35cd 
+    95bcb735 43b2a8bc 217db3b6 accd3817 82f1f451 c8eb798a 04271494 dedd58b3 
+    5defec59 d78ed722 81f23215 4b34ae42 58396b2d 828ce386 9b6ddb3e da96be72 
+    e8deacbb c95e7415 e15d383a b589adee ab603bc6 ddad295e 3330c593 20b064c7 
+    c0d90674 0d1736b2 dc6a5bb6 c6e11d69 a8e7c178 7133efc8 5e1245a3 46e93efa 
+    cbb3ea66 0a8c4025 5993a415 f5bb7071 a50b5aad 67d486f8 ee3ff044 7cd4169a 
+    8560962c d40019f2 248a76f3 25cdc6bf f9a526ec 49bc75ac f6b9dec2 c759549d 
+    faf0afa3 0d259ca7 7ace123a 09373a75 f377e836 2cd402b1 a703bfb2 59fd0790 
+    0dd51700 f132081c a871e44b 6197b88c 0bb8212c 94ffc191 251839df f89dae70 
+    2e431d68 ad27c667 48553698 36f290d0 8d41
+  quit
+crypto ca certificate chain OptumRootCA
+ certificate ca 5d1aba966c0de19347e861dc001567cb
+    3082061c 30820404 a0030201 0202105d 1aba966c 0de19347 e861dc00 1567cb30 
+    0d06092a 864886f7 0d01010b 0500305f 310b3009 06035504 06130255 53311230 
+    10060355 04081309 4d696e6e 65736f74 61311430 12060355 0407130b 4d696e6e 
+    6561706f 6c697331 0e300c06 0355040a 13054f70 74756d31 16301406 03550403 
+    130d4f70 74756d20 526f6f74 20434130 1e170d31 35303431 36313533 3131365a 
+    170d3430 30343136 31353430 34385a30 5f310b30 09060355 04061302 55533112 
+    30100603 55040813 094d696e 6e65736f 74613114 30120603 55040713 0b4d696e 
+    6e656170 6f6c6973 310e300c 06035504 0a13054f 7074756d 31163014 06035504 
+    03130d4f 7074756d 20526f6f 74204341 30820222 300d0609 2a864886 f70d0101 
+    01050003 82020f00 3082020a 02820201 00c97f8a cdd6532a 7f24a62a 54be57bc 
+    08c78d21 8e68765a 5e118e66 2503496c ddd2630a ba15e628 f06d8e64 accc8177 
+    46f596fa 12b96e4f 1c324f9a 02a17da4 06a8e347 59b301de 4421d81a 656a313b 
+    d5b4c625 cad59572 f7263fd3 c5b34d70 8c722d2d d638cc48 a2fbfe5f 249688d3 
+    801a1ae6 2598c4f5 e25be937 37667ed9 9360997f c7308619 ce70e9f0 ac994749 
+    5ec85584 0559fe17 30d66597 0c6adf4e 24174add 5c1156b0 a88d8aa0 69799f5e 
+    dab3e401 769ef918 18d1acee 11c96951 8baae948 f73c1d1a eef5adf5 3c9a55d6 
+    8a82028d ffa40068 ddff1e26 e0edef00 416459dc 6f9ac0f3 d7ec21f9 855744ab 
+    b6ec7f1d 689f06e8 8f07f78b 7773a6c0 4224d4f0 876f10d8 752d9f04 a299103b 
+    f914da11 ca9d2b14 7dca5665 d0db7d9a ab6e5291 2b2feaeb 0504cfe9 3230b08b 
+    ad914350 13c99732 b5318f2e 2498a7ad 80436b35 a307299e 0f56c42a 45c164af 
+    39e3aff6 c3badbea 3864e7f2 1e5b263f fda22ee2 eabf500c a2cd5510 e3df7f64 
+    606ef3ad bb758162 2ba93254 27822835 9848f8c4 3a5db2f6 2ebb101f cb86bf9e 
+    8fe43aba 006fb827 5eb06643 e20d6aa4 77f5c9d1 e5964a61 6f5065bd cef03ac4 
+    b9acf5b2 19f622a3 9d5fed67 7dfb3b16 682b8ed9 3eb2e211 c34817d3 c06cdeb1 
+    b594f0d8 b5630bfe 1a85983d 2796269b fd2b938e abebbd4e 9dec5d5d 51c3067b 
+    6b42a0ab fabb2f7c d30285d6 1ae739fd 93020301 0001a381 d33081d0 300b0603 
+    551d0f04 04030201 86300f06 03551d13 0101ff04 05300301 01ff301d 0603551d 
+    0e041604 14329885 c45e8970 a94ca80d 078a9ec0 7bde222c a5301006 092b0601 
+    04018237 15010403 02010030 7f060355 1d200478 30763074 060b2b06 0104019a 
+    73837d01 64306530 3a06082b 06010505 07020230 2e1e2c00 4c006500 67006100 
+    6c002000 50006f00 6c006900 63007900 20005300 74006100 74006500 6d006500 
+    6e007430 2706082b 06010505 07020116 1b687474 703a2f2f 6f637370 2e6f7074 
+    756d2e63 6f6d2f70 6b692f00 300d0609 2a864886 f70d0101 0b050003 82020100 
+    9c07cde4 2119c2da 75574970 aac2ecc0 c24a5908 817eaec9 954ca9f0 229cd4d6 
+    a9e8e79a 01da3c92 c5422891 68c9d92b 487bb04d dcad58d2 5707a31e d1104f36 
+    259e3601 6b7a9bf3 88f81438 70d3b915 58b7686a f2ec4030 d6b9737b a7784563 
+    c5c46fc6 b31bfc16 fa1cdd18 bdb65acb 4f0348d1 8dbbc6a5 c1a73942 a8149112 
+    8f5ae7ad e821d07d 46524fee 5765ebf9 7eeca254 b183a1be adbcdd5b bc39772f 
+    4cde3477 d48b93f4 9682294e f580ee96 947d4b90 e719f821 34458f67 56725f49 
+    4240d594 fe1459e1 9a27384b 6470d2ca eb1deaa1 e4e73e15 ad359973 d0a31c27 
+    da0f3849 e4729752 af52e7dd dd4e4e6e c5122e90 59a1b101 8d83ad57 d49e98d1 
+    91af7fbc 764219b7 9e8327e8 32739311 448fa521 cc06b827 b50fcdec 054d5e4d 
+    2c7c5f02 dd5f9f42 f4840276 53083199 8d4c9579 cb3880b4 6e748425 982ab53e 
+    5773c867 aa6d95c4 c16c3b4d 1bd61392 1f0f78c9 5cc7176d c58ea810 a39a3633 
+    e39f7ecd 9e31d10c 2293bd2e 6d549503 41be51ce ed80b2b6 810a5ef4 9eeb6878 
+    64b738a5 2366a49d 1545176a c56e98df ff39cca2 68e784b0 26b8ed1e fd40b3de 
+    03fc7ebe 848dbb80 47bad1fc 41937d84 10e8054b 9a5e85a9 a034eb30 c7ce7127 
+    1a8f51ef 2a57a8d8 1a7e4bbd 05a8b212 788e1bce b88018e4 0ed8d5a3 bea38b99 
+    2730d8ca fb1de35c ea5f1b79 b1ecc880 04363602 342c6ef4 1f1342ea 14ae68eb
+  quit
+crypto ca certificate chain OptumInternalIssuingCA3
+ certificate ca 2a00000007f901b5f7f206b722000000000007
+    30820594 3082037c a0030201 0202132a 00000007 f901b5f7 f206b722 00000000 
+    0007300d 06092a86 4886f70d 01010b05 00306a31 0b300906 03550406 13025553 
+    31123010 06035504 0813094d 696e6e65 736f7461 31143012 06035504 07130b4d 
+    696e6e65 61706f6c 6973310e 300c0603 55040a13 054f7074 756d3121 301f0603 
+    55040313 184f7074 756d2049 6e746572 6e616c20 506f6c69 63792043 41301e17 
+    0d313830 34303531 38343133 345a170d 32343034 30353138 35313334 5a307431 
+    13301106 0a099226 8993f22c 64011916 03636f6d 31133011 060a0992 268993f2 
+    2c640119 16037568 63311230 10060a09 92268993 f22c6401 19160264 73311230 
+    10060a09 92268993 f22c6401 1916026d 73312030 1e060355 04031317 4f707475 
+    6d496e74 65726e61 6c497373 75696e67 43413330 82012230 0d06092a 864886f7 
+    0d010101 05000382 010f0030 82010a02 82010100 e2a26cd4 2dc55cbe 522b598d 
+    ccd9deaf c1d14742 e454f55e 4e5c55c0 7dd3b48d 43a7c27a 85bddc1c 0c078a09 
+    2d2b3d29 ca4492c7 31131949 6ea1a8ba 1b08d1de fc991607 4c2b57cd 87e8d088 
+    24e63b2e 3af8c143 61b29363 3b0f6549 a1b6b893 f1c20fd7 da28c321 3dba281f 
+    d147e5a6 85462672 41d3ccd4 39f97a9f 47ef5d79 510cfa4f 66f483cd b66881dd 
+    2b630a18 4232e227 18a8544b 36e52ab8 833a431e a8faf98c be245243 4451525a 
+    62a1175a 1ae3f467 3913204c fc2d5c5a eaac8464 5b401e8b 9c431309 ae160345 
+    05ce227a ce9eb430 8c171c16 64ddc7d3 ca2265f8 32295210 47037395 9a37bb30 
+    32e90d83 954120d1 08a73f9f 3fb1cf17 07384059 02030100 01a38201 27308201 
+    23301006 092b0601 04018237 15010403 02010030 1d060355 1d0e0416 0414f1dc 
+    8f0b79e1 4eacc871 75da0f86 cd8f3f35 480c3019 06092b06 01040182 37140204 
+    0c1e0a00 53007500 62004300 41300b06 03551d0f 04040302 01863012 0603551d 
+    130101ff 04083006 0101ff02 0100301f 0603551d 23041830 168014d0 fba113ed 
+    23638794 180b3ba5 96b1f916 62947230 42060355 1d1f043b 30393037 a035a033 
+    86316874 74703a2f 2f6f6373 702e6f70 74756d2e 636f6d2f 706b692f 4f707475 
+    6d496e74 65726e61 6c506f6c 6963792e 63726c30 4f06082b 06010505 07010104 
+    43304130 3f06082b 06010505 07300286 33687474 703a2f2f 6f637370 2e6f7074 
+    756d2e63 6f6d2f70 6b692f4f 7074756d 496e7465 726e616c 506f6c69 63794341 
+    2e637274 300d0609 2a864886 f70d0101 0b050003 82020100 121ca502 f72f1dda 
+    8f0c74a5 8e075cce bcfe8da7 0d754b39 010d39ff 4e6f96e3 0ef649a3 360c5436 
+    06e368bf f63c520e 0fa6fff4 e77ff10c a7ebaf93 d2a20248 88f03dad d063ca09 
+    d81986f4 ea24b555 2ce4b559 9d490c1b e23be92f 87183c1a be0dd75e 5fc289df 
+    50e3ff63 adb791cc cb70faf8 28778cd0 15aa74b5 e1afaafb a8c3e9c2 8d0d4b76 
+    137a2a22 61602776 f0a15242 f6f14b10 c87b2820 6788674d 5d77f7e3 62b02954 
+    352fa6ee 4d9d3cc1 950601f5 1bd8589d 9b1b7913 eaead9c1 c4de4ec6 3cc028d9 
+    61cfd10f e16fcdb8 2fe38714 3c8b0413 b5a0a243 2b8da9ec fbbd9c21 bd01542e 
+    9367b592 ae6dfbaf 7de39d8f 775502b7 733c596a 90d49c92 d1d96ace 37384832 
+    cc027e4d 3bddc472 0f326d9c eb8d297b e92c11ce 8b3cf0ba 19783cb3 3079a707 
+    213c39dc f9c9331a 7283f0c1 aa406c47 f3c7d37e cf0c618f 69c44842 c7f6046f 
+    3dd92715 a8971c00 bb8cf563 4df55917 7c3f84bb 8cb06766 f90faf95 c7c7c76a 
+    29b32cb9 c0375be7 df3670d0 91c97b60 f2ea4177 24531abe 3a15773c 927b8a3e 
+    2b8e6d5e 55e149a4 70680ee6 12008aa3 f5dbc974 6b049ef3 b10c2496 6f4b71fd 
+    7451dfb2 be8b11a6 5f6b628d 35bdd55b 225e2bb5 7e7d0b75 9fa2da29 f9f7803d 
+    8bfbbc91 9a2a2b47 85068f37 83718ae0 bd43bca6 64c5a90f 1338fd47 4f7678e8 
+    7c0a7e24 c26ea44f 916ee390 2130e029 b8398921 681880f4
+  quit
+crypto ca certificate chain tx777.bc.uhc.com-2022
+ certificate 00bc76f481f1b0238517b070ca235c5986
+    308206d9 308205c1 a0030201 02021100 bc76f481 f1b02385 17b070ca 235c5986 
+    300d0609 2a864886 f70d0101 0b050030 8196310b 30090603 55040613 02474231 
+    1b301906 03550408 13124772 65617465 72204d61 6e636865 73746572 3110300e 
+    06035504 07130753 616c666f 7264311a 30180603 55040a13 11434f4d 4f444f20 
+    4341204c 696d6974 6564313c 303a0603 55040313 33434f4d 4f444f20 52534120 
+    4f726761 6e697a61 74696f6e 2056616c 69646174 696f6e20 53656375 72652053 
+    65727665 72204341 301e170d 32323032 30383030 30303030 5a170d32 33303230 
+    38323335 3935395a 305e310b 30090603 55040613 02555331 12301006 03550408 
+    13094d69 6e6e6573 6f746131 20301e06 0355040a 1317556e 69746564 4865616c 
+    74682047 726f7570 20496e63 2e311930 17060355 04031310 74783737 372e6263 
+    2e756863 2e636f6d 30820122 300d0609 2a864886 f70d0101 01050003 82010f00 
+    3082010a 02820101 00815bc3 9a9d9ee8 bea172c4 a48e9be0 fbc5149d 095489ba 
+    dff05151 5b0fcac4 eb1abb5a 8fc1ad82 2b1c0798 071eefb4 9c86f2ea 8b739c65 
+    e6f03e79 67d48660 07ddde93 69f5f97e 1e168d3a e5d05c84 3ba0eeef 2e606428 
+    d92128a9 a5098f9a 1eef57cb 2d151349 d6eee123 5553fa87 057a0d4b acfa6bc5 
+    cf99540a bfdaeca9 b2237d5d 90b4c667 44cef3c6 53cee480 2afd9503 4b1c8bf5 
+    71640a17 4d0a49c5 66c2e251 ce7e6be0 06f0dc1f 39a887bf fb50a5b1 49b5cd2e 
+    b6771c64 dc0fe681 6455ee9f a30c01ee db51c3b9 4cd4aeca 39b55e9e ad6ed3e3 
+    717df9fe 9a11ea04 b75c1566 3a9bf098 ab33810a 20d4fd99 114e98b9 5c914344 
+    6b62b0bc 61c6928c ef020301 0001a382 03573082 0353301f 0603551d 23041830 
+    1680149a f32bdacf ad4fb62f bb2a4848 2a12b71b 42c12430 1d060355 1d0e0416 
+    04148eab 4340d99f e3df40a8 b1ad3149 39dec31a 7021300e 0603551d 0f0101ff 
+    04040302 05a0300c 0603551d 130101ff 04023000 301d0603 551d2504 16301406 
+    082b0601 05050703 0106082b 06010505 07030230 4a060355 1d200443 30413035 
+    060c2b06 010401b2 31010201 03043025 30230608 2b060105 05070201 16176874 
+    7470733a 2f2f7365 63746967 6f2e636f 6d2f4350 53300806 0667810c 01020230 
+    5a060355 1d1f0453 3051304f a04da04b 86496874 74703a2f 2f63726c 2e636f6d 
+    6f646f63 612e636f 6d2f434f 4d4f444f 5253414f 7267616e 697a6174 696f6e56 
+    616c6964 6174696f 6e536563 75726553 65727665 7243412e 63726c30 818b0608 
+    2b060105 05070101 047f307d 30550608 2b060105 05073002 86496874 74703a2f 
+    2f637274 2e636f6d 6f646f63 612e636f 6d2f434f 4d4f444f 5253414f 7267616e 
+    697a6174 696f6e56 616c6964 6174696f 6e536563 75726553 65727665 7243412e 
+    63727430 2406082b 06010505 07300186 18687474 703a2f2f 6f637370 2e636f6d 
+    6f646f63 612e636f 6d308201 7f060a2b 06010401 d6790204 02048201 6f048201 
+    6b016900 7600adf7 befa7cff 10c88b9d 3d9c1e3e 186ab467 295dcfb1 0c24ca85 
+    8634ebdc 828a0000 017ed714 53060000 04030047 30450221 00db7244 1ebda76e 
+    1a33121f 1d7da86c f3ef27a9 79638e42 004c2197 9130e4c6 5f022035 8f24eda3 
+    27a929e8 13e734aa ae9f7cc9 c1c8c5fc 1f40a96c d5be0a13 0d4b5600 76007a32 
+    8c54d8b7 2db620ea 38e0521e e9841670 3213854d 3bd22bc1 3a57a352 eb520000 
+    017ed714 52c10000 04030047 30450221 008c3ce4 09aa314e d29851ac 3bbd72d3 
+    c958e498 1d2cb70e b57c25ef b3be4923 21022056 5172af44 1c5ea971 9eacd099 
+    0acfa41e 415c6e1e bf9ab3b8 74d296db af36fd00 7700e83e d0da3ef5 063532e7 
+    5728bc89 6bc903d3 cbd1116b eceb69e1 777d6d06 bd6e0000 017ed714 52a30000 
+    04030048 30460221 00c9e7fb cb8e32ea 03f1e409 f0f0dc4c 99f3833d 9444c5c9 
+    4b0be221 62322e83 e3022100 af57c6b5 810a8d05 081e792b 5746c79b 84d5ccfd 
+    0735698e 15fd4a45 73457e36 301b0603 551d1104 14301282 10747837 37372e62 
+    632e7568 632e636f 6d300d06 092a8648 86f70d01 010b0500 03820101 009bf480 
+    ca8b27ab 795515b5 6e945906 51cfab7b 57aebb65 c1c57cd7 4c3b0223 9ecd135c 
+    3e6b007d 336f6a6c 0dca803e 7337917a a9aa0c5f 064cbbae d7acecfd e545cb79 
+    aa7aadc1 3d618b85 c37c9bef 16d0cfdc 2bbf192a e11a00bf f7c8b663 b1fdfec1 
+    38d495b2 b2ba4b5a b355a91c d2972fb4 f73a5ec2 fad19cb4 359859e0 8e700db6 
+    0148cfc3 35340771 972138ae ff93174c 23854c03 01762b05 c6ea0e99 c4affc48 
+    5af23dc6 e6401925 f3e37191 64ce086e 1734d374 da940d71 a56547da 0d913746 
+    c8b95f9f e9fea4cb 896cee4e fc098a48 dc51108b 2f4b002e 53b3ee2f c57a8227 
+    99c71041 e811b89e 2bebc5c4 6f84ae97 2a2c8718 dbf5c394 d34435f3 e7
+  quit
+ certificate ca 36825e7fb5a481937ef6d1736bb93ca6
+    3082060e 308203f6 a0030201 02021036 825e7fb5 a481937e f6d1736b b93ca630 
+    0d06092a 864886f7 0d01010c 05003081 85310b30 09060355 04061302 4742311b 
+    30190603 55040813 12477265 61746572 204d616e 63686573 74657231 10300e06 
+    03550407 13075361 6c666f72 64311a30 18060355 040a1311 434f4d4f 444f2043 
+    41204c69 6d697465 64312b30 29060355 04031322 434f4d4f 444f2052 53412043 
+    65727469 66696361 74696f6e 20417574 686f7269 7479301e 170d3134 30323132 
+    30303030 30305a17 0d323930 32313132 33353935 395a3081 96310b30 09060355 
+    04061302 4742311b 30190603 55040813 12477265 61746572 204d616e 63686573 
+    74657231 10300e06 03550407 13075361 6c666f72 64311a30 18060355 040a1311 
+    434f4d4f 444f2043 41204c69 6d697465 64313c30 3a060355 04031333 434f4d4f 
+    444f2052 5341204f 7267616e 697a6174 696f6e20 56616c69 64617469 6f6e2053 
+    65637572 65205365 72766572 20434130 82012230 0d06092a 864886f7 0d010101 
+    05000382 010f0030 82010a02 82010100 b914d985 f2414457 ff30441e dc3c44a3 
+    17b86e01 f8a35fc2 a9211dce 59f4ecf3 88a90932 3cb18b63 a43e2736 f38ff938 
+    662e0797 418f4ba6 ddc35f9e 733ce7ca 200d4f7c 3205cfc1 2e48654a 85d01f56 
+    316d8ee5 c632d41b bc9f7d96 fc98d74f f8f45856 f8e345be 911882e4 8abeafcd 
+    52375187 4f1e97c1 e83aaef9 ff46e465 3f3fc347 832fccb8 425e2d7e f75a68ae 
+    5d4bc0a6 3521f586 a3c8498b 9863600d c92148c2 92306546 b2863504 42257ead 
+    a74e4b12 40007a88 685c6f9f a3a47811 21ae3d0b 0ebe4514 23cfeb75 d7f6a0f1 
+    bc456c5e bca132ec f3587842 280b3a01 76f0c5a0 9ec16970 de8f4ba6 79dff276 
+    b6e30f13 7c183bb1 516c6a20 39ce9e69 02030100 01a38201 65308201 61301f06 
+    03551d23 04183016 8014bbaf 7e023dfa a6f13c84 8eadee38 98ecd932 32d4301d 
+    0603551d 0e041604 149af32b dacfad4f b62fbb2a 48482a12 b71b42c1 24300e06 
+    03551d0f 0101ff04 04030201 86301206 03551d13 0101ff04 08300601 01ff0201 
+    00301d06 03551d25 04163014 06082b06 01050507 03010608 2b060105 05070302 
+    301b0603 551d2004 14301230 06060455 1d200030 08060667 810c0102 02304c06 
+    03551d1f 04453043 3041a03f a03d863b 68747470 3a2f2f63 726c2e63 6f6d6f64 
+    6f63612e 636f6d2f 434f4d4f 444f5253 41436572 74696669 63617469 6f6e4175 
+    74686f72 6974792e 63726c30 7106082b 06010505 07010104 65306330 3b06082b 
+    06010505 07300286 2f687474 703a2f2f 6372742e 636f6d6f 646f6361 2e636f6d 
+    2f434f4d 4f444f52 53414164 64547275 73744341 2e637274 30240608 2b060105 
+    05073001 86186874 74703a2f 2f6f6373 702e636f 6d6f646f 63612e63 6f6d300d 
+    06092a86 4886f70d 01010c05 00038202 0100698a 36689a1e 3b650be0 7ccfa6ab 
+    713baf61 a43fe464 014910d3 1d8fe2d5 ed67d39e 5b97bd42 1e07f9d0 bb6df732 
+    955a2229 62f80c9c 59562736 a0221211 fa47f451 c9597b29 4aa54835 7cc59766 
+    e027253b 157a3275 4a91fba6 6b9ee253 fa0d8c13 fb23b80b 122caeed db1d4790 
+    d5d09369 76913815 34d718ea 7ebc6b58 de2a3990 0344044a 56d868e5 f57c697e 
+    9e7d544b d0d886ab 67661357 5e892a17 ad2daebd 400e66ed 8aff54b4 c101cba9 
+    e047ba11 618fadae 23482ac6 2579891c 410495c0 11ea572b d6b497fa b1e91562 
+    ec4a7177 fdf3a19c daf66b00 29c532e7 fa4eeab3 2aa71897 1c58a742 365fec14 
+    cff87b0e f7ddcc88 159a9a5c c8f120c7 d18672a1 179baeba fe6ca832 d1007649 
+    73f73f27 873cb6c9 2dfaaa90 90c90a09 9fc9691f 0719a9bf debaf80b 88824416 
+    107f07c0 80225f7f bc30deba cd077964 56d8fff3 4f9c30bb 6e1e514b e6cdbd17 
+    c4c5bfc8 3f8eb11f 8a46b706 436f622d cf519d45 ca8ae913 8bc0c791 be5bb6fa 
+    374a89fe f09dda13 26222c06 903e8b13 98a019d6 ddda4a48 7f3d0f89 9d24724b 
+    0e7b44ff d436b683 7623588b 146cb85d f7616d39 76eddd12 3d6b8788 9791bec0 
+    46021e76 1cddb6af 5c4ff500 d69c4da9 e09ea28e fcb11679 5c21d345 819a0c39 
+    6c6d28d7 25d2b711 90d0f6de 6f5ef4fa a48b6677 722f9b90 402c5212 60f9ffb5 
+    702e899a 79098981 2dec5c78 6f8187f1 fc55
+  quit
+crypto ca certificate chain tx777-1.bc.uhc.com-2022
+ certificate 00b349129c80141265ff5380a6266e4f47
+    308206dc 308205c4 a0030201 02021100 b349129c 80141265 ff5380a6 266e4f47 
+    300d0609 2a864886 f70d0101 0b050030 8196310b 30090603 55040613 02474231 
+    1b301906 03550408 13124772 65617465 72204d61 6e636865 73746572 3110300e 
+    06035504 07130753 616c666f 7264311a 30180603 55040a13 11434f4d 4f444f20 
+    4341204c 696d6974 6564313c 303a0603 55040313 33434f4d 4f444f20 52534120 
+    4f726761 6e697a61 74696f6e 2056616c 69646174 696f6e20 53656375 72652053 
+    65727665 72204341 301e170d 32323032 30383030 30303030 5a170d32 33303230 
+    38323335 3935395a 3060310b 30090603 55040613 02555331 12301006 03550408 
+    13094d69 6e6e6573 6f746131 20301e06 0355040a 1317556e 69746564 4865616c 
+    74682047 726f7570 20496e63 2e311b30 19060355 04031312 74783737 372d312e 
+    62632e75 68632e63 6f6d3082 0122300d 06092a86 4886f70d 01010105 00038201 
+    0f003082 010a0282 01010088 eb6fde6a 73989e5a 8fa60961 08f44c3d 50c8c85a 
+    de235ec5 6ad40672 16785c23 5d361d85 2311d484 670e1174 a8f5981f 4b4217fc 
+    d3d23c34 680c1f13 0761aa29 200d0f78 02fa871e b5b97201 c1521d87 212e617c 
+    cda76a16 c5fe23d3 f8dde9e2 233501e2 4a57d611 39ab8a46 d3ebf0ed 11da2a8b 
+    8d91e0f0 5198f652 c1f54aa2 217d5fcd 3e183bb2 8f0b3020 e47a9bc5 1d35ebb1 
+    a31d6fa7 95659016 aac74770 a089467a bd183059 6beb6d68 069f87c4 34e97349 
+    01428196 9ee1c7b2 f446cc3a 8ca7d00d 2aff5048 18c3ded8 0e501c9c dcbfc94c 
+    a1be0b04 abd37989 7bcaac15 2e9ea340 cd3237da 19eaf454 993d701e b7ae3714 
+    20a60abe 52794661 2c789f02 03010001 a3820358 30820354 301f0603 551d2304 
+    18301680 149af32b dacfad4f b62fbb2a 48482a12 b71b42c1 24301d06 03551d0e 
+    04160414 b5dedaf6 59055f80 9333e240 7918fd87 83c4647a 300e0603 551d0f01 
+    01ff0404 030205a0 300c0603 551d1301 01ff0402 3000301d 0603551d 25041630 
+    1406082b 06010505 07030106 082b0601 05050703 02304a06 03551d20 04433041 
+    3035060c 2b060104 01b23101 02010304 30253023 06082b06 01050507 02011617 
+    68747470 733a2f2f 73656374 69676f2e 636f6d2f 43505330 08060667 810c0102 
+    02305a06 03551d1f 04533051 304fa04d a04b8649 68747470 3a2f2f63 726c2e63 
+    6f6d6f64 6f63612e 636f6d2f 434f4d4f 444f5253 414f7267 616e697a 6174696f 
+    6e56616c 69646174 696f6e53 65637572 65536572 76657243 412e6372 6c30818b 
+    06082b06 01050507 0101047f 307d3055 06082b06 01050507 30028649 68747470 
+    3a2f2f63 72742e63 6f6d6f64 6f63612e 636f6d2f 434f4d4f 444f5253 414f7267 
+    616e697a 6174696f 6e56616c 69646174 696f6e53 65637572 65536572 76657243 
+    412e6372 74302406 082b0601 05050730 01861868 7474703a 2f2f6f63 73702e63 
+    6f6d6f64 6f63612e 636f6d30 82017e06 0a2b0601 0401d679 02040204 82016e04 
+    82016a01 68007600 adf7befa 7cff10c8 8b9d3d9c 1e3e186a b467295d cfb10c24 
+    ca858634 ebdc828a 0000017e d7168751 00000403 00473045 02202be0 4bb964fb 
+    45d77c4d fd7c5d69 30464dcd 0fccf6ec c0d67e9f d1149fdc d6910221 00a3c905 
+    168965b6 27f50204 a2b2c587 73a773ea 1be1cd1c 97b3bfd0 7aff035e fc007700 
+    7a328c54 d8b72db6 20ea38e0 521ee984 16703213 854d3bd2 2bc13a57 a352eb52 
+    0000017e d7168752 00000403 00483046 022100d6 53e637cf bd204d58 b3d75bb9 
+    e0ff96fb 09ff1a7a 93b3d660 a418984e 80cd5c02 210093ec c97405ea ed054a4c 
+    ba586a68 f35e144d b8641c22 7838eff0 d3d0b445 05f10075 00e83ed0 da3ef506 
+    3532e757 28bc896b c903d3cb d1116bec eb69e177 7d6d06bd 6e000001 7ed71687 
+    33000004 03004630 4402202f 6a608e27 d359124e b518f97d 6c897795 6d17fd79 
+    955416fd 2820b08d 1fe9b302 2028a1bc c211af00 c1e31b19 f4f9b2d6 94bef0f0 
+    f6778bc6 0662eac1 eba7a7d4 8f301d06 03551d11 04163014 82127478 3737372d 
+    312e6263 2e756863 2e636f6d 300d0609 2a864886 f70d0101 0b050003 82010100 
+    7e054e92 e2b0d065 9d362418 3891af3a 2d21d5e9 0af6ad3f c9b96024 92e0f230 
+    74e4d519 8412418b d92f33f1 6ee5a483 06c5c1e8 a1e49791 51b28293 3c04dc01 
+    27b5ec4a edc5c99c d422e2e2 321cdc29 54c51eeb 9fc451e7 38631e39 22a871c1 
+    fa082170 631b1d3b f06e8019 ce1e88ea 3d1bcf18 e9e1a042 6516125a 718bae28 
+    f6f6c762 49e897ed 6ee5ba41 456248ae b1252c85 fdc2cf4d 26d6cf1b 7298d5c4 
+    07979340 37d958b8 ec2571e2 51128837 d40889fa 79cbf3b1 9250d1e3 c2dac26d 
+    0bfa06c1 0e5121ac b2afdefc 3f5f9df1 3c157be9 9d4fe863 9ffb6c4e 52304d88 
+    7e90d7c5 18ab00d5 e8a303e4 3c39c3b8 1a0a780e 4e1e0e28 9a94a4a9 846439bb
+  quit
+ certificate ca 36825e7fb5a481937ef6d1736bb93ca6
+    3082060e 308203f6 a0030201 02021036 825e7fb5 a481937e f6d1736b b93ca630 
+    0d06092a 864886f7 0d01010c 05003081 85310b30 09060355 04061302 4742311b 
+    30190603 55040813 12477265 61746572 204d616e 63686573 74657231 10300e06 
+    03550407 13075361 6c666f72 64311a30 18060355 040a1311 434f4d4f 444f2043 
+    41204c69 6d697465 64312b30 29060355 04031322 434f4d4f 444f2052 53412043 
+    65727469 66696361 74696f6e 20417574 686f7269 7479301e 170d3134 30323132 
+    30303030 30305a17 0d323930 32313132 33353935 395a3081 96310b30 09060355 
+    04061302 4742311b 30190603 55040813 12477265 61746572 204d616e 63686573 
+    74657231 10300e06 03550407 13075361 6c666f72 64311a30 18060355 040a1311 
+    434f4d4f 444f2043 41204c69 6d697465 64313c30 3a060355 04031333 434f4d4f 
+    444f2052 5341204f 7267616e 697a6174 696f6e20 56616c69 64617469 6f6e2053 
+    65637572 65205365 72766572 20434130 82012230 0d06092a 864886f7 0d010101 
+    05000382 010f0030 82010a02 82010100 b914d985 f2414457 ff30441e dc3c44a3 
+    17b86e01 f8a35fc2 a9211dce 59f4ecf3 88a90932 3cb18b63 a43e2736 f38ff938 
+    662e0797 418f4ba6 ddc35f9e 733ce7ca 200d4f7c 3205cfc1 2e48654a 85d01f56 
+    316d8ee5 c632d41b bc9f7d96 fc98d74f f8f45856 f8e345be 911882e4 8abeafcd 
+    52375187 4f1e97c1 e83aaef9 ff46e465 3f3fc347 832fccb8 425e2d7e f75a68ae 
+    5d4bc0a6 3521f586 a3c8498b 9863600d c92148c2 92306546 b2863504 42257ead 
+    a74e4b12 40007a88 685c6f9f a3a47811 21ae3d0b 0ebe4514 23cfeb75 d7f6a0f1 
+    bc456c5e bca132ec f3587842 280b3a01 76f0c5a0 9ec16970 de8f4ba6 79dff276 
+    b6e30f13 7c183bb1 516c6a20 39ce9e69 02030100 01a38201 65308201 61301f06 
+    03551d23 04183016 8014bbaf 7e023dfa a6f13c84 8eadee38 98ecd932 32d4301d 
+    0603551d 0e041604 149af32b dacfad4f b62fbb2a 48482a12 b71b42c1 24300e06 
+    03551d0f 0101ff04 04030201 86301206 03551d13 0101ff04 08300601 01ff0201 
+    00301d06 03551d25 04163014 06082b06 01050507 03010608 2b060105 05070302 
+    301b0603 551d2004 14301230 06060455 1d200030 08060667 810c0102 02304c06 
+    03551d1f 04453043 3041a03f a03d863b 68747470 3a2f2f63 726c2e63 6f6d6f64 
+    6f63612e 636f6d2f 434f4d4f 444f5253 41436572 74696669 63617469 6f6e4175 
+    74686f72 6974792e 63726c30 7106082b 06010505 07010104 65306330 3b06082b 
+    06010505 07300286 2f687474 703a2f2f 6372742e 636f6d6f 646f6361 2e636f6d 
+    2f434f4d 4f444f52 53414164 64547275 73744341 2e637274 30240608 2b060105 
+    05073001 86186874 74703a2f 2f6f6373 702e636f 6d6f646f 63612e63 6f6d300d 
+    06092a86 4886f70d 01010c05 00038202 0100698a 36689a1e 3b650be0 7ccfa6ab 
+    713baf61 a43fe464 014910d3 1d8fe2d5 ed67d39e 5b97bd42 1e07f9d0 bb6df732 
+    955a2229 62f80c9c 59562736 a0221211 fa47f451 c9597b29 4aa54835 7cc59766 
+    e027253b 157a3275 4a91fba6 6b9ee253 fa0d8c13 fb23b80b 122caeed db1d4790 
+    d5d09369 76913815 34d718ea 7ebc6b58 de2a3990 0344044a 56d868e5 f57c697e 
+    9e7d544b d0d886ab 67661357 5e892a17 ad2daebd 400e66ed 8aff54b4 c101cba9 
+    e047ba11 618fadae 23482ac6 2579891c 410495c0 11ea572b d6b497fa b1e91562 
+    ec4a7177 fdf3a19c daf66b00 29c532e7 fa4eeab3 2aa71897 1c58a742 365fec14 
+    cff87b0e f7ddcc88 159a9a5c c8f120c7 d18672a1 179baeba fe6ca832 d1007649 
+    73f73f27 873cb6c9 2dfaaa90 90c90a09 9fc9691f 0719a9bf debaf80b 88824416 
+    107f07c0 80225f7f bc30deba cd077964 56d8fff3 4f9c30bb 6e1e514b e6cdbd17 
+    c4c5bfc8 3f8eb11f 8a46b706 436f622d cf519d45 ca8ae913 8bc0c791 be5bb6fa 
+    374a89fe f09dda13 26222c06 903e8b13 98a019d6 ddda4a48 7f3d0f89 9d24724b 
+    0e7b44ff d436b683 7623588b 146cb85d f7616d39 76eddd12 3d6b8788 9791bec0 
+    46021e76 1cddb6af 5c4ff500 d69c4da9 e09ea28e fcb11679 5c21d345 819a0c39 
+    6c6d28d7 25d2b711 90d0f6de 6f5ef4fa a48b6677 722f9b90 402c5212 60f9ffb5 
+    702e899a 79098981 2dec5c78 6f8187f1 fc55
+  quit
+telnet timeout 5
+ssh stricthostkeycheck
+ssh timeout 10
+ssh version 2
+ssh key-exchange group dh-group1-sha1
+ssh 10.0.0.0 255.0.0.0 Inside
+console timeout 10
+management-access Inside
+no vpn-addr-assign aaa
+no vpn-addr-assign local
+vpn-sessiondb max-anyconnect-premium-or-essentials-limit 4094
+vpn load-balancing 
+ redirect-fqdn enable
+ interface lbpublic Outside
+ interface lbprivate Inside
+ cluster ip address 161.249.72.38
+ participate
+!
+tls-proxy maximum-session 1000
+!
+threat-detection basic-threat
+threat-detection statistics access-list
+no threat-detection statistics tcp-intercept
+ssl cipher default fips
+ssl cipher tlsv1 fips
+ssl cipher tlsv1.1 fips
+ssl cipher tlsv1.2 fips
+ssl cipher dtlsv1 fips
+ssl cipher dtlsv1.2 fips
+ssl trust-point tx777-1.bc.uhc.com-2022 Outside
+ssl trust-point tx777.bc.uhc.com-2022 Outside vpnlb-ip
+webvpn
+ enable Outside
+ anyconnect-custom-attr dynamic-split-exclude-domains description SPLIT_TUNNEL_DOMAINS
+ hsts
+  enable
+  max-age 31536000
+  include-sub-domains
+  no preload
+ http-headers
+  x-content-type-options
+  x-xss-protection
+  content-security-policy
+ hostscan image disk0:/hostscan_4.9.04045-k9.pkg
+ hostscan enable
+ anyconnect image disk0:/anyconnect-win-4.7.01076-webdeploy-k9.pkg 1
+ anyconnect image disk0:/anyconnect-win-4.9.00086-webdeploy-k9.pkg 2
+ anyconnect image disk0:/anyconnect-win-4.9.06037-webdeploy-k9.pkg 3
+ anyconnect profiles uhg_always_on_exception disk0:/uhg_always_on_exception_v2.4.xml
+ anyconnect profiles uhg_always_on_exception_elevated disk0:/uhg_always_on_exception_elevated_v1.7.xml
+ anyconnect profiles uhgprofile disk0:/uhgprofile_v4.1.xml
+ anyconnect profiles wellmed_profile disk0:/wellmed_profile_v2.xml
+ anyconnect enable
+ cache
+  disable
+ error-recovery disable
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS kaltura.com,kaltura.io,kms-a.akamaihd.net,kms-b.akamaihd.net,video.uhc.com,webcasts.com,labroots.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS gateway-optum.goskope.com,addon-optum.goskope.com,achecker-optum.goskope.com,dns.google,gateway-backup-optum.goskope.com,gateway-optum2.goskope.com,gateway-backup-optum2.goskope.com,addon-optum2.goskope.com,achecker-optum2.goskope.com,gateway-optum-stage.goskope.com,gateway-backup-optum-stage.goskope.com,addon-optum-stage.goskope.com,achecker-optum-stage.goskope.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS gateway-optum-dev.goskope.com,gateway-backup-optum-dev.goskope.com,addon-optum-dev.goskope.com,achecker-optum-dev.goskope.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS cas.ms,protection.outlook.com,lync.com,teams.microsoft.com,broadcast.skype.com,online.office.com,officeapps.live.com,outlook.office.com,outlook.office365.com,sharepoint.com,smtp.office365.com,compliance.microsoft.com,security.microsoft.com,office.live.com,msappproxy.net,msftidentity.com,msidentity.com,account.activedirectory.windowsazure.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS accounts.accesscontrol.windows.net,adminwebservice.microsoftonline.com,api.passwordreset.microsoftonline.com,autologon.microsoftazuread-sso.com,becws.microsoftonline.com,clientconfig.microsoftonline-p.net,companymanager.microsoftonline.com,device.login.microsoftonline.com,graph.microsoft.com,graph.windows.net,nexus.microsoftonline-p.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS passwordreset.microsoftonline.com,provisioningapi.microsoftonline.com,manage.office.com,protection.office.com,portal.cloudappsecurity.com,account.office.net,admin.microsoft.com,home.office.com,portal.office.com,www.office.com,portal.microsoftonline.com,autodiscover.dsistg.mail.onmicrosoft.com,autodiscover.optumcare.mail.onmicrosoft.com,autodiscover.source.avella.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS autodiscover.source.rmhp.org,autodiscover.uhgazure.mail.onmicrosoft.com,autodiscover-s.outlook.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS winatp-gw-neu.microsoft.com,winatp-gw-weu.microsoft.com,winatp-gw-uks.microsoft.com,winatp-gw-ukw.microsoft.com,winatp-gw-cus.microsoft.com,winatp-gw-eus.microsoft.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS wbx2.com,webex.com,webexcontent.com,ciscospark.com,
+anyconnect-custom-data dynamic-split-exclude-domains SPLIT_TUNNEL_DOMAINS vitalystadaptivelearning.azurewebsites.net,vitalystteamsapp.azurewebsites.net,app.vitalyst.com,a365.vitalyst.com,cowin.gov.in,co-vin.in,namequery.com,absolute.com
+group-policy DfltGrpPolicy attributes
+ banner value This is a private system containing confidential information. Unauthorized use, attempt to access or use this system or information on it by employees or other persons may, subject to applicable local laws, result in discipline, termination, civil fines and/or criminal penalties. This system may only be used for authorized business purposes and in accordance with applicable policies. Limited personal use of this system is permitted as long as use is consistent with applicable policies.
+ wins-server value 10.175.231.100 10.223.192.155
+ dns-server value 10.90.40.105 10.114.36.34
+ vpn-simultaneous-logins 2
+ vpn-idle-timeout 15
+ vpn-filter value DENY_ISE_V2
+ vpn-tunnel-protocol ssl-client 
+ default-domain value uhc.com
+ webvpn
+  anyconnect ssl keepalive none
+  anyconnect ssl rekey method ssl
+  anyconnect dpd-interval client 60
+  anyconnect dpd-interval gateway 60
+  anyconnect modules value vpngina
+  anyconnect ask none default webvpn
+group-policy always_on_healthmarkets_elevated internal
+group-policy always_on_healthmarkets_elevated attributes
+ banner none
+ dhcp-network-scope 10.37.32.0
+ vpn-filter value DENY_ISE_V2
+ group-lock value always_on_healthmarkets_elevated
+ split-tunnel-policy excludespecified
+ split-tunnel-network-list value SPLIT_TUNNEL_IP
+ msie-proxy method use-pac
+ msie-proxy pac-url value http://blueserver.wip.uhc.com/vpnsplit.pac
+ msie-proxy lockdown disable
+ anyconnect-custom dynamic-split-exclude-domains value SPLIT_TUNNEL_DOMAINS
+ webvpn
+  anyconnect profiles value uhg_always_on_exception_elevated type user
+group-policy always_on_healthmarkets internal
+group-policy always_on_healthmarkets attributes
+ banner none
+ dhcp-network-scope 10.37.32.0
+ group-lock value always_on_healthmarkets
+ split-tunnel-policy excludespecified
+ split-tunnel-network-list value SPLIT_TUNNEL_IP
+ msie-proxy method use-pac
+ msie-proxy pac-url value http://blueserver.wip.uhc.com/vpnsplit.pac
+ msie-proxy lockdown disable
+ anyconnect-custom dynamic-split-exclude-domains value SPLIT_TUNNEL_DOMAINS
+ webvpn
+  anyconnect profiles value uhg_always_on_exception type user
+group-policy uhgvpnemp_anyconnect-policy internal
+group-policy uhgvpnemp_anyconnect-policy attributes
+ dhcp-network-scope 10.37.32.0
+ vpn-tunnel-protocol ssl-client 
+ group-lock value DefaultWEBVPNGroup
+ webvpn
+  homepage none
+  anyconnect ssl dtls enable
+  anyconnect mtu 1406
+  anyconnect keep-installer installed
+  anyconnect ssl keepalive none
+  anyconnect ssl rekey time none
+  anyconnect ssl rekey method ssl
+  anyconnect dpd-interval client 120
+  anyconnect dpd-interval gateway none
+  anyconnect ssl compression none
+  anyconnect dtls compression none
+  anyconnect profiles value uhgprofile type user
+  anyconnect ask none default webvpn
+  customization none
+group-policy NSZ_WellMed internal
+group-policy NSZ_WellMed attributes
+ dhcp-network-scope 10.37.32.0
+ vpn-tunnel-protocol ssl-client 
+ group-lock value NSZ_WellMed
+ split-tunnel-all-dns enable
+ webvpn
+  anyconnect ssl dtls enable
+  anyconnect mtu 1406
+  anyconnect keep-installer installed
+  anyconnect ssl keepalive none
+  anyconnect dpd-interval client 120
+  anyconnect dpd-interval gateway 120
+  anyconnect ssl compression none
+  anyconnect profiles value wellmed_profile type user
+  customization value DfltCustomization
+dynamic-access-policy-record DfltAccessPolicy
+ user-message "Your network access is limited because your workstation does not meet the security criteria defined by UHG policy.  Please reboot your workstation and if the problem persists, please contact the help desk. [Error code: VPN02]"
+ network-acl EAC_VPN
+ action quarantine
+dynamic-access-policy-record UHG_RSA_v1.2
+dynamic-access-policy-record UHG_RSA_v1.1
+dynamic-access-policy-record UHG_AlwaysOn_v1.1
+dynamic-access-policy-record UHG_AlwaysOn_v1.0
+dynamic-access-policy-record NSZ_WellMed
+username T3ch1_y password $sha512$5000$ze9ycwa16EbXczXaof/TxA==$/xdyM859JN3IU7Pvww2Ffw== pbkdf2 privilege 15
+tunnel-group DefaultWEBVPNGroup general-attributes
+ authentication-server-group RSA_RADIUS
+ default-group-policy uhgvpnemp_anyconnect-policy
+ dhcp-server 10.204.67.162
+ dhcp-server 10.106.147.102
+tunnel-group NSZ_WellMed type remote-access
+tunnel-group NSZ_WellMed general-attributes
+ authentication-server-group RSA_RADIUS
+ authorization-server-group MS_DOMAIN_USER
+ default-group-policy NSZ_WellMed
+ dhcp-server 10.204.67.162
+ dhcp-server 10.106.147.102
+tunnel-group NSZ_WellMed webvpn-attributes
+ group-url https://tx777-1.bc.uhc.com/wellmed enable
+ group-url https://tx777.bc.uhc.com/wellmed enable
+tunnel-group always_on_healthmarkets type remote-access
+tunnel-group always_on_healthmarkets general-attributes
+ authorization-server-group MS_DOMAIN
+ default-group-policy always_on_healthmarkets
+ dhcp-server 10.204.67.162
+ dhcp-server 10.106.147.102
+ username-from-certificate CN
+tunnel-group always_on_healthmarkets webvpn-attributes
+ authentication certificate
+ group-url https://tx777-1.bc.uhc.com/aovpn_healthmarkets enable
+ group-url https://tx777.bc.uhc.com/aovpn_healthmarkets enable
+tunnel-group always_on_healthmarkets_elevated type remote-access
+tunnel-group always_on_healthmarkets_elevated general-attributes
+ authorization-server-group MS_DOMAIN
+ default-group-policy always_on_healthmarkets_elevated
+ dhcp-server 10.204.67.162
+ dhcp-server 10.106.147.102
+ username-from-certificate CN
+tunnel-group always_on_healthmarkets_elevated webvpn-attributes
+ authentication certificate
+ group-url https://tx777-1.bc.uhc.com/aovpn_healthmarkets_elev enable
+ group-url https://tx777.bc.uhc.com/aovpn_healthmarkets_elev enable
+!
+class-map Riverbed_Class
+ match access-list Riverbed_TCP_Option_76_78
+!
+!
+policy-map RIVERBED-POLICY
+ class Riverbed_Class
+  set connection advanced-options ALLOW-PROBES
+!
+service-policy RIVERBED-POLICY interface Inside
+service-policy RIVERBED-POLICY interface Outside
+prompt hostname context 
+no compression anyconnect-ssl http-comp
+no call-home reporting anonymous
+app-agent heartbeat interval 1000 retry-count 6
+Cryptochecksum:6af73b244120d48084aa8fd020dd868c

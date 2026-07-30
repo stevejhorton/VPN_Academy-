@@ -1,0 +1,1 @@
+%ASA-6-602101: PMTU-D packet 1400 greater than effective mtu 622, dest_addr=10.x.x.x, src_addr=172.x.x.x, prot=UDP

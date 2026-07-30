@@ -1,0 +1,21 @@
+{
+  "id": "dtls_mtu_quiz",
+  "title": "DTLS_MTU_Quiz",
+  "tags": [
+    "dtls",
+    "mtu",
+    "pmtu"
+  ],
+  "questions": [
+    {
+      "q": "Which telemetry source may expose effective MTU evidence?",
+      "choices": [
+        "Splunk_ASA_syslogs",
+        "Only_show_vpn_sessiondb",
+        "DNS_zone_file",
+        "Venafi_dashboard"
+      ],
+      "answer": "Splunk_ASA_syslogs"
+    }
+  ]
+}

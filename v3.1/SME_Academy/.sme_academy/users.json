@@ -1,0 +1,22 @@
+{
+  "_schema_comment": "Optional git/PAT reminder fields are documentation only. Actual PAT values must stay in browser localStorage and must never be committed to the repo.",
+  "_schema_optional_user_fields": {
+    "pat_path": "Optional reminder path like ~/creds/pat.txt or C:\\Users\\YourName\\creds\\pat.txt",
+    "git_owner": "Optional default GitHub owner/org reminder",
+    "git_repo": "Optional default GitHub repo reminder",
+    "git_branch": "Optional default GitHub branch reminder"
+  },
+  "users": {
+    "horton": {
+      "display_name": "Horton",
+      "role": "slo",
+      "module": "empvpn",
+      "_note": "git config and PAT stored in localStorage only, never here"
+    },
+    "demo_sme": {
+      "display_name": "Demo_SME",
+      "role": "learner",
+      "module": "empvpn"
+    }
+  }
+}

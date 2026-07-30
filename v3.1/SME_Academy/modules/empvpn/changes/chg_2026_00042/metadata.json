@@ -1,0 +1,9 @@
+{
+  "id": "chg_2026_00042_dtls_mtu_validation",
+  "source_system": "servicenow_placeholder",
+  "source_record": "CHG_2026_00042",
+  "status": "example",
+  "sanitized": true,
+  "tags": ["change", "dtls", "mtu", "validation", "rollback"],
+  "attachments": []
+}

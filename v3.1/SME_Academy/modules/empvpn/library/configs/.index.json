@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "id": "tx777_example_config",
+      "title": "TX777_Example_ASA_Config",
+      "file": "tx777_example_redacted.txt",
+      "type": "config",
+      "source": "local",
+      "category": "Config_Examples",
+      "tags": [
+        "asa",
+        "config",
+        "tx777",
+        "group_policy",
+        "tunnel_group"
+      ],
+      "levels": [
+        "level2"
+      ],
+      "description": "Example_sanitized_ASA_headend_config_for_training_analysis."
+    }
+  ]
+}

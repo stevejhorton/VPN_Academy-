@@ -1,0 +1,8 @@
+{
+  "name": "SME_Academy",
+  "short_name": "SME_Academy",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#153f6f"
+}

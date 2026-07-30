@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "id": "asa_syslog_guide",
+      "title": "ASA_Syslog_Message_Guide",
+      "file": "asa_syslog.pdf",
+      "type": "pdf",
+      "source": "local",
+      "category": "Cisco_ASA",
+      "tags": [
+        "asa",
+        "syslog",
+        "splunk",
+        "troubleshooting",
+        "mtu",
+        "mss",
+        "pmtu"
+      ],
+      "levels": [
+        "level1",
+        "level2"
+      ],
+      "description": "Cisco_ASA_syslog_reference_used_for_Splunk_driven_troubleshooting."
+    },
+    {
+      "id": "secure_client_admin_guide_5_1",
+      "title": "Cisco_Secure_Client_Admin_Guide_5_1",
+      "file": "secure_client_admin_guide_5_1.pdf",
+      "type": "pdf",
+      "source": "local",
+      "category": "Cisco_Secure_Client",
+      "tags": [
+        "secure_client",
+        "anyconnect",
+        "posture",
+        "vpn_client",
+        "dtls"
+      ],
+      "levels": [
+        "level1",
+        "level2"
+      ],
+      "description": "Official_Cisco_Secure_Client_administration_reference."
+    },
+    {
+      "id": "firepower_4200_asa_getting_started",
+      "title": "Firepower_4200_ASA_Getting_Started",
+      "file": "firepower_4200_asa_getting_started.pdf",
+      "type": "pdf",
+      "source": "local",
+      "category": "Firepower_4200",
+      "tags": [
+        "firepower",
+        "4200",
+        "asa",
+        "headend",
+        "tower_build"
+      ],
+      "levels": [
+        "level2"
+      ],
+      "description": "Cisco_Firepower_4200_ASA_getting_started_reference."
+    }
+  ]
+}

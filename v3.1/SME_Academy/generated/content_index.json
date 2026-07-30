@@ -1,0 +1,300 @@
+[
+  {
+    "kind": "runbook",
+    "module": "empvpn",
+    "id": "dtls_mtu_triage",
+    "title": "DTLS_MTU_Triage",
+    "path": "modules/empvpn/runbooks/dtls_mtu_triage.md",
+    "tags": [
+      "dtls",
+      "mtu",
+      "pmtu",
+      "splunk",
+      "asa"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ]
+  },
+  {
+    "kind": "runbook",
+    "module": "empvpn",
+    "id": "snmp_v2_to_v3",
+    "title": "SNMP_v2_to_v3_Migration",
+    "path": "modules/empvpn/runbooks/snmp_v2_to_v3.md",
+    "tags": [
+      "snmp",
+      "asa",
+      "cacti",
+      "gnx",
+      "monitoring",
+      "change"
+    ],
+    "levels": [
+      "level1"
+    ],
+    "description": "Runbook for migrating ASA headends from SNMPv2c to SNMPv3 community strings, including Cacti, Grafana, and Splunk coordination."
+  },
+  {
+    "kind": "training",
+    "module": "empvpn",
+    "id": "dtls_mtu_troubleshooting",
+    "title": "DTLS_MTU_Troubleshooting",
+    "path": "modules/empvpn/training/level1/dtls_mtu.md",
+    "tags": [
+      "dtls",
+      "mtu",
+      "mss",
+      "pmtu",
+      "udp",
+      "splunk"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ]
+  },
+  {
+    "kind": "training",
+    "module": "empvpn",
+    "id": "tower_build_overview",
+    "title": "Tower_Build_Overview",
+    "path": "modules/empvpn/training/level2/tower_build_overview.md",
+    "tags": [
+      "tower_build",
+      "firepower",
+      "41xx",
+      "42xx",
+      "certificates",
+      "f5"
+    ],
+    "levels": [
+      "level2"
+    ]
+  },
+  {
+    "kind": "change",
+    "module": "empvpn",
+    "id": "chg_2026_00042_dtls_mtu_validation",
+    "title": "summary",
+    "path": "modules/empvpn/changes/chg_2026_00042/summary.md",
+    "tags": [
+      "change",
+      "dtls",
+      "mtu",
+      "validation",
+      "rollback"
+    ],
+    "levels": []
+  },
+  {
+    "kind": "recipe",
+    "module": "empvpn",
+    "id": "recipe_venafi_certificate_renewal",
+    "title": "venafi_certificate_renewal",
+    "path": "modules/empvpn/changes/recipes/venafi_certificate_renewal.md",
+    "tags": [
+      "recipe",
+      "venafi",
+      "certificate",
+      "change",
+      "rollback"
+    ],
+    "levels": []
+  },
+  {
+    "kind": "splunk",
+    "module": "empvpn",
+    "id": "asa_syslog_602101",
+    "title": "ASA_Syslog_602101",
+    "path": "modules/empvpn/splunk/syslog_reference/asa_602101.md",
+    "tags": [
+      "asa",
+      "syslog",
+      "mtu",
+      "pmtu",
+      "fragmentation",
+      "splunk"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ]
+  },
+  {
+    "kind": "wiki",
+    "module": "empvpn",
+    "id": "f5_geo_dns",
+    "title": "F5_Geo_DNS",
+    "path": "modules/empvpn/wiki/f5_geo_dns.md",
+    "tags": [
+      "f5",
+      "geo_dns",
+      "load_balancing",
+      "headend_selection"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ]
+  },
+  {
+    "kind": "wiki",
+    "module": "empvpn",
+    "id": "empvpn_service_map",
+    "title": "EmpVPN_Service_Map",
+    "path": "modules/empvpn/wiki/service_map.md",
+    "tags": [
+      "service_map",
+      "f5",
+      "dns",
+      "venafi",
+      "zscaler",
+      "routing",
+      "sdwan",
+      "datacenter"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ]
+  },
+  {
+    "kind": "document",
+    "module": "empvpn",
+    "id": "inc_template",
+    "title": "Incident_Template",
+    "path": "modules/empvpn/incidents/inc_template.md",
+    "tags": [
+      "incident",
+      "rca",
+      "training_seed"
+    ],
+    "levels": []
+  },
+  {
+    "kind": "wiki",
+    "module": "shared",
+    "id": "git_basics",
+    "title": "Git_Basics_For_SMEs",
+    "path": "modules/shared/wiki/git_basics.md",
+    "tags": [
+      "git",
+      "pr",
+      "workflow"
+    ],
+    "levels": [
+      "level1"
+    ]
+  },
+  {
+    "kind": "library",
+    "module": "empvpn",
+    "id": "asa_syslog_guide",
+    "title": "ASA_Syslog_Message_Guide",
+    "path": "modules/empvpn/library/cisco/asa_syslog.pdf",
+    "type": "pdf",
+    "source": "local",
+    "category": "Cisco_ASA",
+    "tags": [
+      "asa",
+      "syslog",
+      "splunk",
+      "troubleshooting",
+      "mtu",
+      "mss",
+      "pmtu"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ],
+    "description": "Cisco_ASA_syslog_reference_used_for_Splunk_driven_troubleshooting."
+  },
+  {
+    "kind": "library",
+    "module": "empvpn",
+    "id": "secure_client_admin_guide_5_1",
+    "title": "Cisco_Secure_Client_Admin_Guide_5_1",
+    "path": "modules/empvpn/library/cisco/secure_client_admin_guide_5_1.pdf",
+    "type": "pdf",
+    "source": "local",
+    "category": "Cisco_Secure_Client",
+    "tags": [
+      "secure_client",
+      "anyconnect",
+      "posture",
+      "vpn_client",
+      "dtls"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ],
+    "description": "Official_Cisco_Secure_Client_administration_reference."
+  },
+  {
+    "kind": "library",
+    "module": "empvpn",
+    "id": "firepower_4200_asa_getting_started",
+    "title": "Firepower_4200_ASA_Getting_Started",
+    "path": "modules/empvpn/library/cisco/firepower_4200_asa_getting_started.pdf",
+    "type": "pdf",
+    "source": "local",
+    "category": "Firepower_4200",
+    "tags": [
+      "firepower",
+      "4200",
+      "asa",
+      "headend",
+      "tower_build"
+    ],
+    "levels": [
+      "level2"
+    ],
+    "description": "Cisco_Firepower_4200_ASA_getting_started_reference."
+  },
+  {
+    "kind": "library",
+    "module": "empvpn",
+    "id": "tx777_example_config",
+    "title": "TX777_Example_ASA_Config",
+    "path": "modules/empvpn/library/configs/tx777_example_redacted.txt",
+    "type": "config",
+    "source": "local",
+    "category": "Config_Examples",
+    "tags": [
+      "asa",
+      "config",
+      "tx777",
+      "group_policy",
+      "tunnel_group"
+    ],
+    "levels": [
+      "level2"
+    ],
+    "description": "Example_sanitized_ASA_headend_config_for_training_analysis."
+  },
+  {
+    "kind": "library",
+    "module": "empvpn",
+    "id": "empvpn_onedrive_large_docs",
+    "title": "EmpVPN_Large_Document_Library",
+    "url": "https://example.company.sharepoint.com/sites/EmpVPN/Documents",
+    "type": "external",
+    "source": "external",
+    "provider": "OneDrive_or_SharePoint",
+    "category": "External_Library",
+    "tags": [
+      "onedrive",
+      "sharepoint",
+      "large_docs"
+    ],
+    "levels": [
+      "level1",
+      "level2"
+    ],
+    "description": "Placeholder_for_large_docs_that_should_not_live_in_Git."
+  }
+]

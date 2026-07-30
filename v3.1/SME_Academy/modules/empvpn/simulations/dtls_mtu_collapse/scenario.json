@@ -1,0 +1,49 @@
+{
+  "id": "dtls_mtu_collapse",
+  "title": "DTLS_MTU_Collapse",
+  "level": "level2",
+  "tags": [
+    "dtls",
+    "mtu",
+    "pmtu",
+    "splunk",
+    "asa_syslog_602101"
+  ],
+  "mode": "troubleshooting",
+  "status": "draft",
+  "story": {
+    "ticket_summary": "Users connect successfully but report poor performance over DTLS.",
+    "environment": "Cisco_Secure_Client_to_ASA_Firepower_headend.",
+    "learner_goal": "Identify whether the issue is client, headend, path, F5/DNS, or MTU related."
+  },
+  "evidence": [
+    {
+      "label": "ASA_syslog_excerpt",
+      "path": "logs/sample_asa_events.log"
+    }
+  ],
+  "steps": [
+    {
+      "question": "First useful telemetry source?",
+      "choices": [
+        "Reinstall_client",
+        "Search_Splunk_for_ASA_syslogs",
+        "Change_DNS",
+        "Renew_cert"
+      ],
+      "answer": "Search_Splunk_for_ASA_syslogs",
+      "explain": "Splunk contains session and PMTU evidence without touching production."
+    },
+    {
+      "question": "Which ASA syslog is most relevant to effective MTU?",
+      "choices": [
+        "602101",
+        "722051",
+        "113019",
+        "302013"
+      ],
+      "answer": "602101",
+      "explain": "602101 includes PMTU-D/effective MTU style evidence."
+    }
+  ]
+}

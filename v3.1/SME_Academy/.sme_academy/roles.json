@@ -1,0 +1,125 @@
+{
+  "roles": {
+    "learner": {
+      "label": "Learner",
+      "wiki_edit": false,
+      "edit_wiki": false,
+      "edit_library": false,
+      "edit_training": false,
+      "edit_simulations": false,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": false
+    },
+    "sme": {
+      "label": "SME",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": false,
+      "edit_training": false,
+      "edit_simulations": false,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": false
+    },
+    "contributor": {
+      "label": "Contributor",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": false,
+      "edit_training": false,
+      "edit_simulations": false,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": false
+    },
+    "curator": {
+      "label": "Curator",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": true,
+      "edit_training": true,
+      "edit_simulations": true,
+      "view_all_progress": true,
+      "manage_users": false,
+      "curator_console": true
+    },
+    "wiki_curator": {
+      "label": "Wiki_Curator",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": false,
+      "edit_training": false,
+      "edit_simulations": false,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": true
+    },
+    "library_curator": {
+      "label": "Library_Curator",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": true,
+      "edit_training": false,
+      "edit_simulations": false,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": true
+    },
+    "simulation_curator": {
+      "label": "Simulation_Curator",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": false,
+      "edit_training": false,
+      "edit_simulations": true,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": true
+    },
+    "training_curator": {
+      "label": "Training_Curator",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": true,
+      "edit_training": true,
+      "edit_simulations": true,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": true
+    },
+    "curator": {
+      "label": "Curator",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": true,
+      "edit_training": true,
+      "edit_simulations": true,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": true
+    },
+    "sme": {
+      "label": "SME",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": false,
+      "edit_training": false,
+      "edit_simulations": false,
+      "view_all_progress": false,
+      "manage_users": false,
+      "curator_console": false
+    },
+    "slo": {
+      "label": "SLO",
+      "wiki_edit": true,
+      "edit_wiki": true,
+      "edit_library": true,
+      "edit_training": true,
+      "edit_simulations": true,
+      "view_all_progress": true,
+      "manage_users": true,
+      "curator_console": true
+    }
+  }
+}

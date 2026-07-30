@@ -1,0 +1,41 @@
+{
+  "items": [
+    {
+      "id": "empvpn_onedrive_large_docs",
+      "title": "EmpVPN_Large_Document_Library",
+      "type": "external",
+      "source": "external",
+      "provider": "OneDrive_or_SharePoint",
+      "url": "https://example.company.sharepoint.com/sites/EmpVPN/Documents",
+      "category": "External_Library",
+      "tags": [
+        "onedrive",
+        "sharepoint",
+        "large_docs"
+      ],
+      "levels": [
+        "level1",
+        "level2"
+      ],
+      "description": "Placeholder_for_large_docs_that_should_not_live_in_Git."
+    },
+    {
+      "id": "azure_blob_archives",
+      "title": "Azure_Blob_Archive_Reference",
+      "type": "external",
+      "source": "external",
+      "provider": "Azure_Blob",
+      "url": "https://example.blob.core.windows.net/empvpn-docs/",
+      "category": "External_Library",
+      "tags": [
+        "azure",
+        "archive",
+        "large_docs"
+      ],
+      "levels": [
+        "level2"
+      ],
+      "description": "Placeholder_for_archive_docs_or_large_artifacts."
+    }
+  ]
+}

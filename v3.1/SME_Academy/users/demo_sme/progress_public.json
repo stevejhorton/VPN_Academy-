@@ -2,8 +2,9 @@
   "display_name": "Demo_SME",
   "track": "level1",
   "percent_complete": 22,
-  "badges": [
-    "Git_Basics"
-  ],
-  "labs_completed": 1
+  "badges": ["Git_Basics"],
+  "labs_completed": 1,
+  "points": 110,
+  "leaderboard_alias": "SME_A",
+  "cert_level": "none"
 }
